@@ -2,7 +2,7 @@
 
 Bunch of useful instructions for developers about:
 
-[Chrome](chrome.md)\
-[Elasticsearch](elasticsearch.md)\
-[Glut](glut.md)\
+[Chrome](chrome.md)<br/>
+[Elasticsearch](elasticsearch.md)<br/>
+[Glut](glut.md)<br/>
 [Mongo DB](mongodb.md)
