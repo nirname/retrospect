@@ -13,3 +13,5 @@ Bunch of useful instructions for developers about:
 [Mongo DB](mongodb.md)<br/>
 [RVM](rvm.md)<br/>
 [Ubuntu](ubuntu.md)<br/>
+[Shortcuts](shortcuts.md)<br/>
+[Sendmail](sendmail.md)<br/>
