@@ -5,6 +5,7 @@
 !/templates/*
 
 !*.md
+!*.example
 
 !.gitignore
 !makefile
