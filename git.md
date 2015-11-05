@@ -38,3 +38,7 @@
     # -f argument with
     # -n to perform a dry-run
     # or -i for interactive mode and it will tell you what will be removed.
+
+## Pushing to a Remote Branch with a Different Name
+
+    git push origin local-name:remote-name.
