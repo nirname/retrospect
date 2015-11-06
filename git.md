@@ -8,20 +8,27 @@
 
     git config --global user.email
 
+## Remove branch
+
+    git branch -d feature # locally
+    git push origin :feature # from remote
+
 ## Remove only tag
 
     git tag -d 12345 # locally
-    git push origin :refs/tags/12345 # from repository
+    git push origin :refs/tags/12345 # from remote
 
 ## Create repository available for pushes
 
     git init --bare
 
-## Turn an existing "non-bare" repository into a "bare"
+## Turn an existing "non-bare" repository into a "bare" \
+(with working directory)
 
     git clone --bare -l non_bare_repo new_bare_repo
 
-## Turn an existing "bare" repository into a "non-bare"
+## Turn an existing "bare" repository into a "non-bare" \
+(without working directory)
 
     git clone
 
@@ -42,3 +49,9 @@
 ## Pushing to a Remote Branch with a Different Name
 
     git push origin local-name:remote-name.
+
+## Reverse ignoring
+
+    * # ignore all
+    !/templates # don't ignore directory
+    !/templates/* # and files inside
