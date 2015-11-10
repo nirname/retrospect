@@ -14,8 +14,11 @@ software sources:
 
 ## Managing users
 
-    useradd -m username -s /bin/bash
-    passwd username
+    sudo useradd user
+    sudo useradd -m username -s /bin/bash
+    sudo passwd username
+
+    sudo usermod -a -G sudo user
 
 ## Generate password
 
