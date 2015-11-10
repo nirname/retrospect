@@ -66,5 +66,13 @@
     xboard
     gnuchess (xboard -size medium -fcp gnuchess)
 
-    ngrok
     nautilus-open-terminal
+
+Прокси серверы для получения внешнего доменного имени
+
+    ngrok
+
+Плееры, для Go2Meeting
+
+    vlc vlc-plugin-pulse mozilla-plugin-vlc
+    smplayer
