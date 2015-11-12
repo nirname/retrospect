@@ -90,13 +90,13 @@ the `excludesfile` key:
 (лежит в /path/to/B) в наш проект в поддиректорию dir-B/.
 
     $ git remote add -f Bproject /path/to/B
-    $ git merge -s ours --no-commit Bproject/master
+    $ git merge -s subtree --no-commit Bproject/master
     $ git read-tree --prefix=dir-B/ -u Bproject/master
     $ git commit -m "Merge B project as our subdirectory"
 
 Если не ходим делать лишних коммитов, используем --squash
 
-    $ git merge --squash -s ours --no-commit Bproject/master
+    $ git merge --squash -s subtree --no-commit Bproject/master
 
 Нужно обратить внимание на ключ -f у git remote add.
 Он говорит гиту сразу сделать fetch этого remote-а.
