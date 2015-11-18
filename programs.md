@@ -8,8 +8,7 @@
     dconf-tools
     elasticsearch
     firebug
-    gedit-gmate
-    gedit-plugins
+
     git
     gitg
     glut

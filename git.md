@@ -119,3 +119,9 @@ remote-а в рабочую копию:
 В дальнейшем, если появляются новые ветки, можно подтягивать изменения в remote:
 
     $ git fetch Bproject
+
+## Extract as subtree
+
+    git checkout subbranch
+    git filter-branch --subdirectory-filter subdirectory -- --all
+git filter-branch --subdirectory-filter doc -- --all

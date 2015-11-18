@@ -2,28 +2,29 @@
 
 ## Plugins
 
+**Package of plugins**
+
     sudo apt-get install gedit-gmate gedit-plugins
 
-## Markdown preview dependencies
+**Markdown preview dependencies**
 
     sudo apt-get install python3-markdown gir1.2-webkit-3.0
 
-## Where to find `gedit` styles & highlights
+**EditorConfig**
 
-    ~/.local/share/gtksourceview-2.0/styles/
-    /usr/share/gnome/gtksourceview-2.0/styles/
-    /usr/local/share/gtksourceview-2.0/styles/
-    /usr/share/gtksourceview-2.0/styles/
+    python3-setuptools
+    https://pypi.python.org/pypi/EditorConfig
+    http://editorconfig.org/
 
-    /usr/share/gtksourceview-3.0/styles/
-    ~/.local/share/gedit/styles
+    sudo apt-get install python-pip
+    pip install editorconfig
 
-    /usr/share/gtksourceview-3.0/language-specs/
+    $ cd editorconfig_plugin
+    $ ./install.sh
+    $ cd editorconfig-core-py
+    $ sudo python setup.py install
 
-    /usr/lib/gedit/plugins
-
-
-## Hard word wrap
+**Hard word wrap**
 
 > Use `Ctrl + J` for joining lines & `Ctrl + Shift + J` for splitting them
 
@@ -72,3 +73,17 @@ gedit program by default, but thankfully it’s very easily remedied with
 the method described above.
 
 Look at the [text wrap plugin](http://hartmann-it-design.de/gedit/TextWrap/)
+
+## Where to find gedit styles & highlights
+
+    ~/.local/share/gtksourceview-2.0/styles/
+    /usr/share/gnome/gtksourceview-2.0/styles/
+    /usr/local/share/gtksourceview-2.0/styles/
+    /usr/share/gtksourceview-2.0/styles/
+
+    /usr/share/gtksourceview-3.0/styles/
+    ~/.local/share/gedit/styles
+
+    /usr/share/gtksourceview-3.0/language-specs/
+
+    /usr/lib/gedit/plugins
