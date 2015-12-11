@@ -11,7 +11,7 @@ OBJECTS_DIR = doc
 MD_SOURCES = $(shell find . -name '*.md' | cut -sd / -f 2-)
 
 HTML_OBJECTS = $(MD_SOURCES:%.md=$(OBJECTS_DIR)/%.html)
-HTML_CONTENT = $(OBJECTS_DIR)/content.html
+HTML_INDEX = $(OBJECTS_DIR)/index.html
 
 # Debug
 #all:
@@ -20,14 +20,14 @@ HTML_CONTENT = $(OBJECTS_DIR)/content.html
 
 all: md
 
-#md: $(HTML_CONTENT) $(HTML_OBJECTS)
+#md: $(HTML_INDEX) $(HTML_OBJECTS)
 md: $(HTML_OBJECTS)
 
 $(OBJECTS_DIR)/%.html: $(SOURCES_DIR)/%.md makefile
 	@ mkdir -p $(@D)
 	$(MD) --to html $< --output $@
 
-#$(HTML_CONTENT):
+#$(HTML_INDEX):
 #	$(MD) --toc --chapters chrome.md ffmpeg.md --output $@
 
 PHONY: clean

@@ -25,6 +25,7 @@
     rvm
     skype
     sqldeveloper
+    dbeaver
     tcl
     vera++
     postgresql
