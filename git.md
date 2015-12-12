@@ -1,10 +1,10 @@
 # GIT
 
+## Installation
+
+    apt-get install git-core
+
 ## Settings
-
-# Installations
-
-  apt-get install git-core
 
 ### Set a new email
 
@@ -14,7 +14,7 @@
 
     git config --global user.email
 
-## Working
+## Commands
 
 ### Remove branch
 
@@ -84,7 +84,9 @@ the `excludesfile` key:
     [core]
         excludesfile = ~/.gitignore
 
-## Subtree
+## Subtrees
+
+### Add subtree
 
 Пример из документации: добавляем код из ветки master репозитория Bproject
 (лежит в /path/to/B) в наш проект в поддиректорию dir-B/.
@@ -120,8 +122,37 @@ remote-а в рабочую копию:
 
     $ git fetch Bproject
 
-## Extract as subtree
+### Extract as subtree
 
     git checkout subbranch
     git filter-branch --subdirectory-filter subdirectory -- --all
-git filter-branch --subdirectory-filter doc -- --all
+    git filter-branch --subdirectory-filter doc -- --all
+
+## Spesifying Revisions
+
+See [git-rev-parse](http://schacon.github.io/git/git-rev-parse#_specifying_revisions).
+
+Here is an illustration, by Jon Loeliger. Both commit nodes B and C are parents
+of commit node A. Parent commits are ordered left-to-right.
+
+    G   H   I   J
+     \ /     \ /
+      D   E   F
+       \  |  / \
+        \ | /   |
+         \|/    |
+          B     C
+           \   /
+            \ /
+             A
+
+    A =      = A^0
+    B = A^   = A^1     = A~1
+    C = A^2  = A^2
+    D = A^^  = A^1^1   = A~2
+    E = B^2  = A^^2
+    F = B^3  = A^^3
+    G = A^^^ = A^1^1^1 = A~3
+    H = D^2  = B^^2    = A^^^2  = A~2^2
+    I = F^   = B^3^    = A^^3^
+    J = F^2  = B^3^2   = A^^3^2
