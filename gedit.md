@@ -4,6 +4,7 @@
 
 **Package of plugins**
 
+    sudo apt-add-repository ppa:ubuntu-on-rails/ppa && sudo apt-get update
     sudo apt-get install gedit-gmate gedit-plugins
 
 **Markdown preview dependencies**
