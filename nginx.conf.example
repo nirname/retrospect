@@ -7,6 +7,12 @@ http {
   include /usr/local/nginx/conf/mime.types;
 
   server {
+    #root /path/to/project/doc;
+
+    location = / {
+      index index.html;
+    }
+
     location ~ \.md$ {
       if (!-f $request_filename) {
         rewrite ^(.*)\.md$ $1 permanent;
@@ -14,12 +20,10 @@ http {
     }
 
     location / {
-      #root /path/to/project;
       try_files /$uri /$uri.html;
     }
 
     location /styles {
-      #root /path/to/styles/;
     }
   }
 }
