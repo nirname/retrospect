@@ -14,6 +14,43 @@
 
     git config --global user.email
 
+### Aliases
+
+Add the following to the `.gitconfig` file in your `$HOME` directory.
+
+[alias]
+  co = checkout
+  cm = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+
+### Diff with Meld
+
+Install `meld`
+
+    sudo apt-get install meld
+
+Add the following to the `.gitconfig` file in your `$HOME` directory.
+
+[diff]
+        external = /home/user/diff.py
+
+Put `diff.py` in your home directory
+
+    #!/usr/bin/python
+
+    import sys
+    import os
+
+    os.system('meld "%s" "%s"' % (sys.argv[2], sys.argv[5]))
+
+Make it executable
+
+    chmod 755 ~/diff.py
+
 ## Commands
 
 ### Remove branch
