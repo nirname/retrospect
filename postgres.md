@@ -8,7 +8,6 @@ Install libraries
 
     sudo apt-get install libpq-dev
 
-
 Run this before `bundle install`
 
     bundle config build.pg --with-pg-config=/usr/pgsql-9.3/bin/pg_config
@@ -35,6 +34,14 @@ Manage database user
 
     createuser -P -s -e username
     dropuser username
+
+Change a role's password:
+
+    ALTER ROLE davide WITH PASSWORD 'hu8jmn3';
+
+Remove a role's password:
+
+    ALTER ROLE davide WITH PASSWORD NULL;
 
 Manage database
 
@@ -73,6 +80,13 @@ Dump and restore database
     pg_dump -Fc -U user database > path/to/dump # dump
     psql dbname < path/to/dump # restore
     pg_restore -U user -d database filename # restore
+
+PostGIS
+
+    sudo apt-get install postgis*
+
+    CREATE EXTENSION postgis;
+    SELECT postgis_full_version();
 
 For ansible
 

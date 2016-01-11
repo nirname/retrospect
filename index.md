@@ -2,6 +2,7 @@
 
 Bunch of useful instructions for developers about:
 
+[aerospike](aerospike.md)<br/>
 [chrome](chrome.md)<br/>
 [elasticsearch](elasticsearch.md)<br/>
 [ffmpeg](ffmpeg.md)<br/>
@@ -20,6 +21,8 @@ Bunch of useful instructions for developers about:
 [postgres](postgres.md)<br/>
 [programs](programs.md)<br/>
 [railroady](railroady.md)<br/>
+[rails](rails.md)<br/>
+[redis](redis.md)<br/>
 [rhythmbox](rhythmbox.md)<br/>
 [rvm](rvm.md)<br/>
 [sendmail](sendmail.md)<br/>
