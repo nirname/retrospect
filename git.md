@@ -99,6 +99,21 @@ Make it executable
 
     git push origin local-name:remote-name.
 
+Easy way:
+
+Set push.default to upstream to push branches to their upstreams (which is the
+same that pull will pull from, defined by branch.newb.merge), rather than
+pushing branches to ones matching in name (which is the default setting for
+push.default, matching)
+
+    git config push.default upstream
+
+Note that this used to be called tracking not upstream before Git 1.7.4.2, so if
+you're using an older version of Git, use tracking instead. The push.default
+option was added in Git 1.6.4, so if you're on an older version than that, you
+won't have this option at all and will need to explicitly specify the branch to
+push to.
+
 ## Ignoring
 
 ### Reverse ignoring
