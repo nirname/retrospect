@@ -91,6 +91,10 @@ Make it executable
     # -n to perform a dry-run
     # or -i for interactive mode and it will tell you what will be removed.
 
+### Checkout to branch with different name
+
+    git co -b local-branch remote/remote-branch
+
 ### Pushing to a Remote Branch with a Different Name
 
     git push origin local-name:remote-name.
