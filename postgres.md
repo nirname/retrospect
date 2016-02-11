@@ -77,9 +77,15 @@ Upgrade from 9.1 to 9.3
 
 Dump and restore database
 
+    # -Fc - custom format
+
     pg_dump -Fc -U user database > path/to/dump # dump
     psql dbname < path/to/dump # restore
     pg_restore -U user -d database filename # restore
+
+    # restore sql
+
+    psql -U user database < dump
 
 PostGIS
 
