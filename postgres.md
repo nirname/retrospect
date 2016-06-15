@@ -1,12 +1,24 @@
 # Postgres
 
+## Installation
+
+Check out [installation guide](https://access.redhat.com/site/documentation/en-US/JBoss_Operations_Network/2.1/html/Installation_Guide/Installation_Guide-Database-PostgreSQL_Quick_Start_Installation.html)
+
+### Ubuntu
+
+    sudo apt-get install libpq-dev
+
+### OS X
+
+    brew update
+    brew doctor
+    brew install postgres
+
+## Using with Ruby
+
 Add to Gemfile
 
     gem 'pg'
-
-Install libraries
-
-    sudo apt-get install libpq-dev
 
 Run this before `bundle install`
 
@@ -16,7 +28,7 @@ Without `bundle`
 
     gem install pg -- --with-pg-config=/usr/pgsql-9.3/bin/pg_config
 
-Check out [installation guide](https://access.redhat.com/site/documentation/en-US/JBoss_Operations_Network/2.1/html/Installation_Guide/Installation_Guide-Database-PostgreSQL_Quick_Start_Installation.html)
+## Running
 
 Starting and stopping database server
 
@@ -25,6 +37,11 @@ Starting and stopping database server
       start
       stop
       restart
+
+Autostart for OS X
+
+    mkdir -p ~/Library/LaunchAgents
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 
 Login as `postgres` user
 
