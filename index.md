@@ -3,6 +3,7 @@
 Bunch of useful instructions for developers about:
 
 [aerospike](aerospike.md)<br/>
+[ansible](ansible.md)<br/>
 [chrome](chrome.md)<br/>
 [elasticsearch](elasticsearch.md)<br/>
 [ffmpeg](ffmpeg.md)<br/>
