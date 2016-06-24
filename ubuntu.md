@@ -43,6 +43,12 @@ software sources:
 
     ls -Q | sort | tail -n 1 | xargs cat > "`date +tasks\ %Y-%m-%d.txt`"
 
+## List of opened ports
+
+    sudo lsof -i
+    sudo netstat -lptu
+    sudo netstat -tulpn
+
 # Making scripts run at boot time with Debian
 
 Posted by Steve on Mon 11 Oct 2004 at 13:01
