@@ -23,9 +23,16 @@ Add the following to the `.gitconfig` file in your `$HOME` directory.
       cm = commit
       st = status
       br = branch
+      mr = merge
       hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
       type = cat-file -t
       dump = cat-file -p
+      ignore = update-index --assume-unchanged
+      unignore = update-index --no-assume-unchanged
+      ignored = !git ls-files -v | grep "^[[:lower:]]"
+    [core]
+      excludesfile = ~/.gitignore
+
 
 ### Diff with Meld
 
@@ -51,6 +58,14 @@ Make it executable
 
     chmod 755 ~/diff.py
 
+Add to `~/.gitconfig`
+
+    [diff]
+      external = ~/diff.py
+    [merge]
+      tool = meld
+
+
 ## Commands
 
 ### Remove branch
@@ -67,13 +82,13 @@ Make it executable
 
     git init --bare
 
-<h3> Turn an existing "non-bare" repository into a "bare"<br/>
-(without working directory)</h3>
+### Turn an existing "non-bare" repository into a "bare"<br/>
+(without working directory)
 
     git clone --bare -l non_bare_repo new_bare_repo
 
-<h3>Turn an existing "bare" repository into a "non-bare" <br/>
-(with working directory)</h3>
+### Turn an existing "bare" repository into a "non-bare"<br/>
+(with working directory)
 
     git clone
 
@@ -113,6 +128,28 @@ you're using an older version of Git, use tracking instead. The push.default
 option was added in Git 1.6.4, so if you're on an older version than that, you
 won't have this option at all and will need to explicitly specify the branch to
 push to.
+
+## Rebase
+
+Choose priority of file while doing `rebase`
+
+    git checkout --ours index.html
+    git checkout --theirs _layouts/default.html
+
+Sadly, these options are only in Git versions 1.6.1 and up.
+If you have an older version and don’t feel like upgrading,
+there’s ways to get around this.
+
+To emulate `--theirs`, we’d do:
+
+    git reset -- _layouts/default.html
+    git checkout MERGE_HEAD -- _layouts/default.html
+
+And for `--ours`:
+
+    git reset -- index.html
+    git checkout ORIG_HEAD -- index.html
+
 
 ## Ignoring
 
