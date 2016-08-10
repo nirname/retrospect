@@ -65,7 +65,6 @@ Add to `~/.gitconfig`
     [merge]
       tool = meld
 
-
 ## Commands
 
 ### Remove branch
@@ -129,7 +128,9 @@ option was added in Git 1.6.4, so if you're on an older version than that, you
 won't have this option at all and will need to explicitly specify the branch to
 push to.
 
-## Rebase
+## Rebase and resolving conflicts
+
+How to resolve conflict while doing rebase.
 
 Choose priority of file while doing `rebase`
 
@@ -150,7 +151,6 @@ And for `--ours`:
     git reset -- index.html
     git checkout ORIG_HEAD -- index.html
 
-
 ## Ignoring
 
 ### Reverse ignoring
@@ -169,7 +169,6 @@ You can exclude files on a per repository basis by editing the
 `.git/info/excludes` file in your repository
 
 ### Per Computer: through settings in ~/.gitconfig
-
 
 In `.gitconfig` file under the `[core]` section add the path to file for
 the `excludesfile` key:
@@ -201,7 +200,6 @@ the `excludesfile` key:
 
     $ git pull -s subtree Bproject master
 
-
 Если в рабочей копии не добавлен соответствующий remote-у поддерева, в истории
 основного репозитория не показывается имя ветки, из которой притянуты изменения.
 
@@ -209,7 +207,6 @@ the `excludesfile` key:
 remote-а в рабочую копию:
 
     $ git remote add -f Bproject /path/to/B
-
 
 В дальнейшем, если появляются новые ветки, можно подтягивать изменения в remote:
 
