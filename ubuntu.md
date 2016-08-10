@@ -49,6 +49,10 @@ software sources:
     sudo netstat -lptu
     sudo netstat -tulpn
 
+## Directory of shell command
+
+    type -a command
+
 # Making scripts run at boot time with Debian
 
 Posted by Steve on Mon 11 Oct 2004 at 13:01
