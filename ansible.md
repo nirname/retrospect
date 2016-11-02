@@ -17,6 +17,11 @@ Ubuntu
     sudo apt-get update
     sudo apt-get install ansible
 
+Zabbix API
+
+    pip show pyzabbix
+    pip show zabbix-api
+
 ## Usage
 
 Run playbook locally

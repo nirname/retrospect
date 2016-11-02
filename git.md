@@ -67,6 +67,10 @@ Add to `~/.gitconfig`
 
 ## Commands
 
+### Reverse diff
+
+    git diff -R stash@{0}
+
 ### Remove branch
 
     git branch -d feature # locally
