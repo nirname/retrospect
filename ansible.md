@@ -1,5 +1,11 @@
 # Ansible
 
+## Articles
+
+[Multistage Environments With Ansible](http://rosstuck.com/multistage-environments-with-ansible/)<br/>
+[Using Host and Group Vars Files in Ansible](http://toja.io/using-host-and-group-vars-files-in-ansible/)
+
+
 ## Installation
 
 OS X
@@ -41,7 +47,7 @@ Install roles
 List Installed Roles in `roles_path`
 
     ansible-galaxy list
-    
+
 Remove role
 
     ansible-galaxy remove username.rolename
@@ -71,8 +77,3 @@ Specify hostfile
 Change roles path. You can specify multiple directories
 
     roles_path = requirements:vendor
-
-## Articles
-
-[Multistage Environments With Ansible](http://rosstuck.com/multistage-environments-with-ansible/)<br/>
-[Using Host and Group Vars Files in Ansible](http://toja.io/using-host-and-group-vars-files-in-ansible/)
