@@ -3,5 +3,20 @@
 ## Rename files recursively / Change extensions
 
 ```bash
-find . -name '*.ru.txt' -exec sh -c 'mv "$0" "${0%.ru.txt}.en.txt"' {} \;
+find . -name '*ru.yml' -exec sh -c 'mv "$0" "${0%ru.yml}en.yml"' {} \;
+```
+
+## Replace string in all files
+
+Ubuntu
+
+```bash
+find . -type f -iname "*en.yml" -exec sed -i 's/ru:/en:/g' {} +
+```
+
+Mac
+
+
+```bash
+find . -type f -iname "*en.yml" -exec sed -i '' -e 's/ru:/en:/g' {} +
 ```
