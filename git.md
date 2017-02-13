@@ -229,16 +229,7 @@ See [git-rev-parse](http://schacon.github.io/git/git-rev-parse#_specifying_revis
 Here is an illustration, by Jon Loeliger. Both commit nodes B and C are parents
 of commit node A. Parent commits are ordered left-to-right.
 
-    G   H   I   J
-     \ /     \ /
-      D   E   F
-       \  |  / \
-        \ | /   |
-         \|/    |
-          B     C
-           \   /
-            \ /
-             A
+![Git revisions](git-revisions.dot)
 
     A =      = A^0
     B = A^   = A^1     = A~1
