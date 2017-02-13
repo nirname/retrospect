@@ -23,7 +23,7 @@ CSS_ASSETS = $(shell find $(ASSETS_DIR) -name '*.css' | cut -sd / -f 2-)
 CSS_BUILDS = $(CSS_ASSETS:%.css=$(BUILDS_DIR)/%.css)
 
 JS_ASSETS = $(shell find $(ASSETS_DIR) -name '*.js' | cut -sd / -f 2-)
-JS_BUILDS = $(JS_ASSETSm:%.js=$(BUILDS_DIR)/%.js)
+JS_BUILDS = $(JS_ASSETS:%.js=$(BUILDS_DIR)/%.js)
 
 MD_SOURCES = $(shell find $(SOURCES_DIR) -name '*.md' | cut -sd / -f 2-)
 HTML_OBJECTS = $(MD_SOURCES:%.md=$(OBJECTS_DIR)/%.html)
@@ -64,22 +64,25 @@ watch:
 serve:
 	cd $(OBJECTS_DIR) && python -m SimpleHTTPServer 8000
 
-clean: clean_builds clean_objects clean_dir
+clean:
+	rm -rf $(OBJECTS_DIR)
 
-clean_builds:
-	- rm $(CSS_BUILDS)
+# clean: clean_builds clean_objects clean_dir
 
-clean_objects:
-	- rm $(HTML_OBJECTS)
+# clean_builds:
+# 	- rm $(CSS_BUILDS)
 
-clean_dir:
-	- find $(OBJECTS_DIR) -type d -empty -delete
+# clean_objects:
+# 	- rm $(HTML_OBJECTS)
+
+# clean_dir:
+# 	- find $(OBJECTS_DIR) -type d -empty -delete
 
 debug:
-	@echo $(CSS_ASSETS)
-	@echo $(CSS_BUILDS)
-# @echo $(JS_ASSETS)
-# @echo $(JS_BUILDS)
+	@echo $(JS_ASSETS)
+	@echo $(JS_BUILDS)
+# @echo $(CSS_ASSETS)
+# @echo $(CSS_BUILDS)
 # @echo $(MD_SOURCES)
 # @echo $(HTML_OBJECTS)
 # @echo $(DOT_OBJECTS)
