@@ -23,7 +23,7 @@ CSS_ASSETS = $(shell find $(ASSETS_DIR) -name '*.css' | cut -sd / -f 2-)
 CSS_BUILDS = $(CSS_ASSETS:%.css=$(BUILDS_DIR)/%.css)
 
 JS_ASSETS = $(shell find $(ASSETS_DIR) -name '*.js' | cut -sd / -f 2-)
-JS_BUILDS = $(CSS_ASSETS:%.js=$(BUILDS_DIR)/%.js)
+JS_BUILDS = $(JS_ASSETSm:%.js=$(BUILDS_DIR)/%.js)
 
 MD_SOURCES = $(shell find $(SOURCES_DIR) -name '*.md' | cut -sd / -f 2-)
 HTML_OBJECTS = $(MD_SOURCES:%.md=$(OBJECTS_DIR)/%.html)
@@ -40,9 +40,9 @@ $(BUILDS_DIR)/%.css: $(ASSETS_DIR)/%.css
 	@mkdir -p $(@D)
 	cp -f $< $@
 
-# $(BUILDS_DIR)/%.js: $(ASSETS_DIR)/%.js
-# 	@mkdir -p $(@D)
-# 	cp -f $< $@
+$(BUILDS_DIR)/%.js: $(ASSETS_DIR)/%.js
+	@mkdir -p $(@D)
+	cp -f $< $@
 
 sources: $(HTML_OBJECTS) $(DOT_OBJECTS)
 
