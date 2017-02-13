@@ -7,15 +7,3 @@ digraph revisions {
   { B, C } -> A
 
 }
-/*
-G   H   I   J
- \ /     \ /
-  D   E   F
-   \  |  / \
-    \ | /   |
-     \|/    |
-      B     C
-       \   /
-        \ /
-         A
-         */

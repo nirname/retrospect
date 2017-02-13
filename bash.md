@@ -16,7 +16,6 @@ find . -type f -iname "*en.yml" -exec sed -i 's/ru:/en:/g' {} +
 
 Mac
 
-
 ```bash
 find . -type f -iname "*en.yml" -exec sed -i '' -e 's/ru:/en:/g' {} +
 ```
