@@ -6,20 +6,24 @@
 
 Remove new lines and extra spaces
 
-    <<-MSG.squish
-      Hello
-      world
-    MSG
+```ruby
+<<-MSG.squish
+  Hello
+  world
+MSG
 
-    # => "Hello world"
+# => "Hello world"
+```
 
 **strip_heredoc** (Rails only)
 
 Remove initial indentation
 
-    <<-MSG.strip_heredoc
-      Hello
-        world
-    MSG
+```ruby
+<<-MSG.strip_heredoc
+  Hello
+    world
+MSG
 
-    # => "Hello\n  world"
+# => "Hello\n  world"
+```

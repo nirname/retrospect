@@ -18,7 +18,9 @@ Check out [installation guide](https://access.redhat.com/site/documentation/en-U
 
 Add to Gemfile
 
-    gem 'pg'
+```ruby
+gem 'pg'
+```
 
 Run this before `bundle install`
 
@@ -68,17 +70,28 @@ Manage database
 
 Database console
 
-    psql # open console
-    \du # list of users
-    \q # quit
-    \l # all schemas
+```bash
+psql # open console
+\du # list of users
+\q # quit
+\l # all schemas
+```
 
-    select * from pg_trigger; # select triggers
+Select triggers
+
+```sql
+select * from pg_trigger;
+```
 
 Check out version
 
-    psql --version;
-    select version();
+```bash
+psql --version;
+```
+
+```sql
+select version();
+```
 
 Find configuration file
 
@@ -124,12 +137,14 @@ Check out listen addresses
 
 Database config example
 
-    production:
-      adapter: postgresql
-      encoding: unicode
-      database: my_database
-      host: 1.2.3.4
-      port: 5432
-      pool: 10
-      username: my_user
-      password: password
+```yaml
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: my_database
+  host: 1.2.3.4
+  port: 5432
+  pool: 10
+  username: my_user
+  password: password
+```

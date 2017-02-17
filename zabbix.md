@@ -10,9 +10,11 @@
 
 в поле Operations делаю
 
-    Add host
-    Add to host groups: Discovered hosts
-    Link to templates: base_linux_tmpl
+```bash
+Add host
+Add to host groups: Discovered hosts
+Link to templates: base_linux_tmpl
+```
 
 сохранаю и все хосты у которых сервером стоит наш сервер автоматически добавляются, добавляются в группу Discovered hosts и им добавляется темплейт base_linux_tmpl
 
