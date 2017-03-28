@@ -53,7 +53,7 @@ Add the following to the `.gitconfig` file in your `$HOME` directory.
 
 ```ini
 [diff]
-  external = /home/user/diff.py
+  external = ~/diff.py
 ```
 
 Put `diff.py` in your home directory
