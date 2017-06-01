@@ -18,16 +18,27 @@ Check npm version
 
 Check installation path
 
-    npm config get prefix
+    npm config get prefix -g
 
-Reassure you are an owner
+Make a directory for global installations:
 
-    sudo chown -R user /home/user/.node # Replace user to real user name
+    mkdir ~/.npm-global
 
-Add to `.bashrc`
+Configure npm to use the new directory path:
 
-    export PATH="$HOME/.node/bin:$PATH"
-    source ~/.bash_profile
+    npm config set prefix '~/.npm-global'
+
+Open or create a ~/.profile file and add this line:
+
+    export PATH=~/.npm-global/bin:$PATH
+
+Back on the command line, update your system variables:
+
+    source ~/.profile
+
+Reassure you are an owner, if you want
+
+    sudo chown -R user /home/user/.npm-global # Replace user to real user name
 
 **Bower**
 
