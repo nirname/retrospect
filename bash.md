@@ -19,3 +19,9 @@ Mac
 ```bash
 find . -type f -iname "*en.yml" -exec sed -i '' -e 's/ru:/en:/g' {} +
 ```
+
+## Redirect stderr to pipe
+
+```bash
+command 2>&1 >/dev/null
+```
