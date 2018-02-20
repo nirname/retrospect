@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>gedit</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="gedit">Gedit</h1>
+<h2 id="plugins">Plugins</h2>
+<p><strong>Package of plugins</strong></p>
+<pre><code>sudo apt-add-repository ppa:ubuntu-on-rails/ppa &amp;&amp; sudo apt-get update
+sudo apt-get install gedit-gmate gedit-plugins</code></pre>
+<p><strong>Markdown preview dependencies</strong></p>
+<pre><code>sudo apt-get install python3-markdown gir1.2-webkit-3.0</code></pre>
+<p><strong>EditorConfig</strong></p>
+<pre><code>python3-setuptools
+https://pypi.python.org/pypi/EditorConfig
+http://editorconfig.org/
+
+sudo apt-get install python-pip
+pip install editorconfig
+
+$ cd editorconfig_plugin
+$ ./install.sh
+$ cd editorconfig-core-py
+$ sudo python setup.py install</code></pre>
+<p><strong>Hard word wrap</strong></p>
+<blockquote>
+<p>Use <code>Ctrl + J</code> for joining lines &amp; <code>Ctrl + Shift + J</code> for splitting them</p>
+</blockquote>
+<p>A hard word wrap or line break feature isn’t included in gedit by default, but it’s easily added by using the ‘External Tools’ plugin and a two-liner shell script. This will allow you to format your documents with a line break at column 80, or whatever you’d like it to be, by selecting the text, paragraph, or entire document and applying the shell script. Here’s how…</p>
+<ol type="1">
+<li>Open gedit</li>
+<li>Navigate to Edit -&gt; Preferences -&gt; Plugins</li>
+<li>Enable “External Tools” and press “Configure Plugin”</li>
+<li>Press “New” and enter “Line Break at Col 80” (or any name you like)</li>
+<li>Paste the following script in the “command(s)” text area (you can choose to leave out the #comments, these are only here as a reminder in case you want to modify it to fit your needs):</li>
+</ol>
+<p>Bash script:</p>
+<pre><code>#!/bin/sh
+
+BREAK=80
+
+# fmt [-WIDTH][OPTION]... [FILE]...
+# --uniform-spacing -- one space between words, two after sentences
+# --split-only -- split long lines, but do not refill
+# --width=WIDTH -- maximum line width (default of 75 columns)
+# when FILE is -, read standard input
+
+fmt --uniform-spacing --split-only --width $BREAK -</code></pre>
+<ol start="6" type="1">
+<li>Choose “Current selection” as Input</li>
+<li>Choose “Replace current selection” as Output</li>
+<li>At this point, you can choose to create a shortcut key such as “ctrl+m” for easy access.</li>
+<li>Close “External Tools Manager” by pressing the “Close” button</li>
+<li>Now this script is executable under the “Tools” menu. Alternatively, you can use your shortcut key for quick access.</li>
+</ol>
+<p>The next step would be to somehow get gedit to automatically perform these hard wraps as your typing (like the evolution email client does). If anybody has a suggestion, I’d love to hear about it in the comments below. I’m very surprised that this isn’t included in the already many featured gedit program by default, but thankfully it’s very easily remedied with the method described above.</p>
+<p>Look at the <a href="http://hartmann-it-design.de/gedit/TextWrap/">text wrap plugin</a></p>
+<h2 id="where-to-find-gedit-styles-highlights">Where to find gedit styles &amp; highlights</h2>
+<pre><code>~/.local/share/gtksourceview-2.0/styles/
+/usr/share/gnome/gtksourceview-2.0/styles/
+/usr/local/share/gtksourceview-2.0/styles/
+/usr/share/gtksourceview-2.0/styles/
+
+/usr/share/gtksourceview-3.0/styles/
+~/.local/share/gedit/styles
+
+/usr/share/gtksourceview-3.0/language-specs/
+
+/usr/lib/gedit/plugins</code></pre>
+<h2 id="hotkeys">Hotkeys</h2>
+<p>Look at</p>
+<pre><code>~/.config/gedit/accels</code></pre>
+<h2 id="snippets">Snippets</h2>
+<p>This is copy of <a href="http://www.tuxradar.com/content/save-time-gedit-snippets">this article</a> I wanted to save</p>
+<hr />
+<p>Some people think that Gedit is a toy text editor not suitable for more experienced users. And while it might lack Emacs’s psychiatrist or Vim’s undo branching, it turns out that Gedit has a lot of power under its hood - if you know where to look.</p>
+<p>One feature that is guaranteed to save you time is Snippets, a plugin that enables quick insertion of commonly used text, and something we use frequently here on TuxRadar. We’re going to show you how to get started using the built-in snippets, and how you can use shell commands and even Python code to make your own…</p>
+<p>You see, a lot of our content is drawn from the archives of Linux Format magazine, a magazine that is produced using Mac OS X, Adobe InDesign and a dozen other proprietary tools. No, it’s not ideal, but sadly we have little say in the matter. Besides, you don’t think the folks behind Cross Stitcher magazine stitch their magazine together, do you?</p>
+<p>Anyway, the problem with converting articles from the magazine world to the internet world is the need to replace special symbols with more simple equivalents. Magazines, for example, make extensive use of curly quotes, em- and en-dashes, ellipses (…), non-breaking spaces and more. And while these do have HTML equivalents, they are rarely used, so we strip all these out and replace them with simple ASCII characters.</p>
+<p>Once that’s done, we need to convert articles to HTML, and that’s what takes the real time. Or at least it did - until we started using Snippets. You see, Snippets allows you to insert pre-defined blocks of text either by using a keystroke or tab completion. That’s not an uncommon feature in a text editor, admittedly, but Snippets makes it particularly easy to create more advanced placeholders for text replacement, even allowing output from the shell and Python scripts.</p>
+<p>Before we get started with some example snippets, you need to make sure you have the Snippets plugin enabled. Fire up Gedit and go to Edit &gt; Preferences. From the Plugins tab, scroll down and make sure Snippets is checked. Once that’s done you should see the Configure Plugin button become active - that’s where we’ll be doing most of our work.</p>
+<h3 id="a-basic-snippet">A basic snippet</h3>
+<p>Copy and paste this into your Gedit window:</p>
+<pre><code>He thrusts his fists
+Against the posts
+And still insists
+He sees the ghosts.</code></pre>
+That gives you four simple lines of text. Save that file as test.html - it doesn’t really matter where. But what does matter is that Gedit now knows your file is HTML, which means Snippets knows too and will activate its list of HTML snippets. For example, if you select the whole first line and press Shift+Alt+W, it will automatically be wrapped in a
+<p>
+<p>tag, like this:</p>
+<pre><code>&lt;p&gt;He thrusts his fists&lt;/p&gt;</code></pre>
+What’s more, Gedit will automatically leave the first “p” highlighted so that you can replace it just by typing, and any changes you make will be copied across to the
+</p>
+<p>tag so that it matches. To see how this works, go back to the Configure Plugin window for Snippets (you’ll also find it under Tools &gt; Manage Snippets) then look inside the HTML category for the snippet called “Wrap Selection in Open/Close Tag”.</p>
+<p>When you select that snippet, the code behind it will appear in the top-right of the window, and should look like this:</p>
+<pre><code>&lt;${1:p}&gt;$GEDIT_SELECTED_TEXT&lt;/${1}&gt;</code></pre>
+<p>$1 is a placeholder, which means it’s something you want to type into after the snippet has been inserted. In this case, there’s only one placeholder, $1, but it appears twice. Because the same placeholder number has been used twice - known as a “mirror placeholder” - Gedit will ensure that whatever you type in the first $1 will be synchronised with the second $1, which is how you can change <code>&lt;p&gt;</code> to <code>&lt;h1&gt;</code> and it will be changed in the closing tag too.</p>
+<p>The “:p” part of the snippet sets a default value, in this case the HTML paragraph tag, “p”. If you leave off the default value, Gedit will just leave a blank spot for you to type.</p>
+<p>Finally, the most important part: $GEDIT_SELECTED_TEXT. This is a special value inside snippets that will be automatically replaced with the contents of whatever text you had selected before the snippet was used. You’ll be using this a lot!</p>
+<h3 id="working-with-multiple-placeholders">Working with multiple placeholders</h3>
+<p>That basic snippet had just one placeholder, which meant that it prompted you to edit only one piece of text. A slightly more complicated snippet is called “Wrap Selection as Link”, and has two placeholders. To test it out, select the second of your text lines and press Shift+Alt+L. You should see this:</p>
+<pre><code>&lt;a href=&quot;http://somesite.com/&quot;&gt;Against the posts&lt;/a&gt;</code></pre>
+<p>After the snippet has run, Gedit will leave the insertion cursor over “http://somesite.com/” with that text highlighted so you can replace it by typing. Type http://www.tuxradar.com in there and then - this is the important bit - press Tab. When you do that, Gedit will move the caret to “Against the posts” and select it just as it had selected “http://somesite.com/”. That’s because this snippet has two placeholders defined: “$1:http://www.somesite.com/” and “$2:GEDIT_SELECTED_TEXT”.</p>
+<p>You can have as many of these placeholders as you need, and any number of them can have default values specified - just press Tab to move between them.</p>
+<h3 id="bringing-in-output-from-the-shell">Bringing in output from the shell</h3>
+<p>We’re going to create a new snippet from scratch to show off some of the more advanced features of Snippets. Go to Tools &gt; Manage Snippets to bring up the Snippets Manager, then scroll up to the top of the category list to where it says “Global”.</p>
+<p>The Snippets Manager lets you create and edit your own snippets across a number of different languages.</p>
+<p>Select that, then click the Create New Snippet button (it’s just above the Help button at the bottom of the window).</p>
+<p>Call your new snippet “Insert file” and put the following inside it:</p>
+<pre><code>$(1:cat $GEDIT_SELECTED_TEXT)</code></pre>
+<p>Notice how that uses standard parentheses (ie “(” and “)”) rather than braces (“{” and “}”) - that’s because the parts inside the parentheses will be sent to a shell, executed, then be replaced with whatever the shell command prints out.</p>
+<p>What that code example does is run “cat” on a filename, with the filename being specified as $GEDIT_SELECTED_TEXT so all you have to do is type a filename into Gedit, select it, then run the snippet. Underneath the text area for entering snippets are some text boxes marked “Activation”. Click inside the Shortcut Key box then press any shortcut you want to assign to this snippet and it will become active immediately.</p>
+<p>You can run any shell commands you like, as long as they return their output back using stdout. For example, the “bc” mixed with Gedit Snippets means we can create a simple calculator. In the Snippets Manager, create a new snippet under the Global category called Calculator. Give it this text:</p>
+<p>$(1:echo $GEDIT_SELECTED_TEXT | bc)</p>
+<p>Give it the shortcut Ctrl+Shift+C, then click Close and type this into your Gedit file:</p>
+<p>5 + 10 / 2 * 9</p>
+<p>Select it all, then press Ctrl+Shift+C to see your text replaced with the answer to the calculation: 50.</p>
+<p>Gedit detects the end of the shell command by looking for a closing parenthesis (“)”), so if your command includes one you need to put a backslash before it, like this:</p>
+<p>$(1:echo “This is a (test)” &gt; file.txt)</p>
+<p>That will save the text “This is a test” to file.txt. As you can see, there is no need to escape the opening parenthesis (“(”).</p>
+<h3 id="mixing-in-some-python">Mixing in some Python</h3>
+<p>Here’s where Snippets really starts to prove its worth: you can run Python code wherever and whenever you want to. Let’s start with a simplified example of a snippet we use here on TuxRadar to kill off curly quotes:</p>
+<pre><code>$&lt; return $GEDIT_SELECTED_TEXT.replace(&#39;“&#39;, &#39;&quot;&#39;) &gt;</code></pre>
+<p>That is designed to convert this:</p>
+<pre><code>“Hello, world!”</code></pre>
+<p>…into this:</p>
+<pre><code>&quot;Hello, world!&quot;</code></pre>
+<p>The “$&lt;” part signals the beginning of your Python code, and it ends with the corresponding “&gt;” at the end of the snippet. In between is a call to the replace() method of a Python string - in this case, $GEDIT_SELECTED_TEXT - which replaces a curly quote with a simple ASCII one.</p>
+<p>When you’ve finished making all your changes to the input, you hand any output back to Gedit using Python’s “return” statement.</p>
+<p>That initial snippet fixes the opening curly quote, but not the closing curly quote, which is easily fixed simply by making the snippet span more than one line, like this:</p>
+<pre><code>$&lt;
+output = $GEDIT_SELECTED_TEXT.replace(&#39;“&#39;, &#39;&quot;&#39;)
+output = output.replace(&#39;”&#39;, &#39;&quot;&#39;)
+return output
+&gt;</code></pre>
+<p>If you’re obsessed with brevity, you could write that as a one-liner using something like this:</p>
+<pre><code>$&lt;return $GEDIT_SELECTED_TEXT.replace(&#39;“&#39;, &#39;&quot;&#39;).replace(&#39;”&#39;, &#39;&quot;&#39;) &gt;</code></pre>
+<p>As with shell placeholders, you need to be sure to escape the end symbol if needed, which in the case of Python placeholders is &gt;. To give you a working example of this, consider our original text:</p>
+<pre><code>He thrusts his fists
+Against the posts
+And still insists
+He sees the ghosts.</code></pre>
+If you wanted to put
+<p>
+<p>tags around each of those lines, you could select each line individually and use Shift+Alt+W. But with Python we can select the whole paragraph, split it by new lines, then add HTML tags for each line, like this:</p>
+<pre><code>$&lt;
+lines = $GEDIT_SELECTED_TEXT.split(&quot;\n&quot;);
+output = &quot;&quot;;
+for line in lines:
+  output += &quot;&lt;p\&gt;&quot; + line + &quot;&lt;/p\&gt;\n&quot;;
+return output
+&gt;</code></pre>
+What that does is split up the selected text by line breaks, then loop over each line and add it along with the
+<p>
+start and end tags to the output. However, because
+<p>
+and
+</p>
+<p>both contain the &gt; symbol, Gedit will think that means the end of your Python snippet. So, the solution is to put a  before the &gt; so that Gedit ignores it.</p>
+<p>Note that we’ve used “” to add line breaks of our own into the output to keep things neat.</p>
+<h3 id="converting-tabs-to-tables">Converting tabs to tables</h3>
+<p>Copy and paste this into your Gedit document:</p>
+<pre><code>a   apples
+b   bananas
+c   cherries
+d   dates</code></pre>
+<p>That’s a list of items, one per line, where the item on the left is separated from the item on the right by a tab character. This is a fairly common way to work with tables in plain-text, but with a bit of Gedit + Snippets + Python magic we can whip that up into a real HTML table.</p>
+<p>What we need to do is simple:</p>
+<pre><code>Split the selected text by line break
+Loop over each line
+Split each line by tab
+Add HTML table tags</code></pre>
+<p>…while remembering that any time we want to print &gt; we need to put a  before it. Here’s how to do that in Python:</p>
+<pre><code>$&lt;
+lines = $GEDIT_SELECTED_TEXT.split(&quot;\n&quot;);
+output = &#39;&lt;table\&gt;\n&#39;;
+
+for line in lines:
+  output += &#39;&lt;tr\&gt;&#39;;
+
+  columns = line.split(&quot;\t&quot;);
+  for item in columns:
+  output += &#39;&lt;td\&gt;&#39; + item + &#39;&lt;/td\&gt; &#39;
+
+  output += &#39;&lt;/tr\&gt;\n&#39;;
+
+output += &#39;&lt;/table\&gt;&#39;;
+return output
+&gt;</code></pre>
+<p>If you assign that to a shortcut, then select the four lines from before and run the snippet, you’ll get this:</p>
+<pre><code>&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;a&lt;/td&gt; &lt;td&gt;apples&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;b&lt;/td&gt; &lt;td&gt;bananas&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;c&lt;/td&gt; &lt;td&gt;cherries&lt;/td&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;d&lt;/td&gt; &lt;td&gt;dates&lt;/td&gt; &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p>If you wanted to be a bit more fancy and include some zebra stripes for your table rows, just drop in a counter variable and use modulo (%) to check whether it’s odd or even, like this:</p>
+<pre><code>$&lt;
+lines = $GEDIT_SELECTED_TEXT.split(&quot;\n&quot;)
+output = &#39;&lt;table\&gt;\n&#39;
+counter = 0
+
+for line in lines:
+  if counter % 2 == 0:
+    output += &#39;&lt;tr class=&quot;even&quot;\&gt;&#39;
+    else:
+    output += &#39;&lt;tr class=&quot;odd&quot;\&gt;&#39;
+
+    columns = line.split(&quot;\t&quot;)
+  for item in columns:
+    output += &#39;&lt;td\&gt;&#39; + item + &#39;&lt;/td\&gt; &#39;
+
+  output += &#39;&lt;/tr\&gt;\n&#39;
+  counter += 1
+
+output += &#39;&lt;/table\&gt;&#39;
+return output
+&gt;</code></pre>
+<h3 id="some-last-tips">Some last tips</h3>
+<p>There’s a huge amount you can do with Snippets, particularly when you start taking advantage of shell and Python placeholders. But before we let you run free, here are three last pointers:</p>
+<pre><code>You can use the $0 placeholder to specify the last position that should be jumped to. By default this is the end of your snippet, but if you use $0 you can choose somewhere else.
+Along with $GEDIT_SELECTED_TEXT, you can also use $GEDIT_FILENAME and $GEDIT_BASENAME to use the full filename (eg /home/tuxradar/foo.bar) and the base filename (eg foo.bar) in your snippets.
+When you&#39;ve arranged all your snippets just as you want them, go into the Snippets Manager and click the save icon to export selected snippets as XML so you can copy them other machines.</code></pre>
+<p>Have fun - and make sure you take a look through some of the awesome snippets that are included by default!</p>
+</body>
+</html>

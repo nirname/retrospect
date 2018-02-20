@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>rhythmbox</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="rhythmbox">Rhythmbox</h1>
+<pre><code>~/.local/share/rhythmbox
+~/.cache/rhythmbox
+~/.gconf/apps/rhythmbox.</code></pre>
+<p>You can use your file browser to do this or run this command from the terminal:</p>
+<pre><code>rm ~/.local/share/rhythmbox/ ~/.cache/rhythmbox/ ~/.gconf/apps/rhythmbox/ -r</code></pre>
+<p>There are a couple of ways to edit the locations information - either graphically using <code>dconf-editor</code> or via the terminal using gsettings.</p>
+<p><strong>First the graphical way</strong>.</p>
+<p>Install the package <code>dconf-tools</code>. In the dash press Alt+F2 and type <code>dconf-editor</code>. Find <code>org-&gt;gnome-&gt;rhythmbox-&gt;rhythmdb</code> and edit the locations</p>
+<p><strong>Using <code>gsettings</code></strong>:</p>
+<pre><code>gsettings get org.gnome.rhythmbox.rhythmdb locations
+[&#39;file:///home/dad/Music&#39;, &#39;file:///home/dad/.ubuntuone/Purchased%20from%20Ubuntu%20One&#39;]
+gsettings set org.gnome.rhythmbox.rhythmdb locations &quot;[&#39;file:///home/dad/Music&#39;, &#39;file:///media/musiclibrary/mymusic&#39;]&quot;
+
+gsettings reset-recursively org.gnome.rhythmbox
+gsettings reset-recursively org.gnome.rhythmbox.display-page-tree
+gsettings reset-recursively org.gnome.rhythmbox.library
+gsettings reset-recursively org.gnome.rhythmbox.player
+gsettings reset-recursively org.gnome.rhythmbox.plugins
+gsettings reset-recursively org.gnome.rhythmbox.plugins.iradio
+gsettings reset-recursively org.gnome.rhythmbox.plugins.lyrics
+gsettings reset-recursively org.gnome.rhythmbox.plugins.magnatune
+gsettings reset-recursively org.gnome.rhythmbox.plugins.replaygain
+gsettings reset-recursively org.gnome.rhythmbox.plugins.visualizer
+gsettings reset-recursively org.gnome.rhythmbox.podcast
+gsettings reset-recursively org.gnome.rhythmbox.podcast
+gsettings reset-recursively org.gnome.rhythmbox.rhythmdb
+gsettings reset-recursively org.gnome.rhythmbox.sharing
+gsettings reset-recursively org.gnome.rhythmbox.sources</code></pre>
+</body>
+</html>

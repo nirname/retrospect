@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ansible</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0; background-color: #ffffff; color: #a0a0a0;  padding-left: 4px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.bn { color: #b08000; } /* BaseN */
+code span.fl { color: #b08000; } /* Float */
+code span.cn { color: #aa5500; } /* Constant */
+code span.ch { color: #924c9d; } /* Char */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.st { color: #bf0303; } /* String */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.im { color: #ff5500; } /* Import */
+code span.co { color: #898887; } /* Comment */
+code span.do { color: #607880; } /* Documentation */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.ot { color: #006e28; } /* Other */
+code span.fu { color: #644a9b; } /* Function */
+code span.va { color: #0057ae; } /* Variable */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.at { color: #0057ae; } /* Attribute */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.in { color: #b08000; } /* Information */
+code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span. { color: #1f1c1b; } /* Normal */
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="ansible">Ansible</h1>
+<h2 id="articles">Articles</h2>
+<p><a href="http://rosstuck.com/multistage-environments-with-ansible/">Multistage Environments With Ansible</a><br/> <a href="http://toja.io/using-host-and-group-vars-files-in-ansible/">Using Host and Group Vars Files in Ansible</a></p>
+<h2 id="installation">Installation</h2>
+<p>OS X</p>
+<pre class="sourceCode bash" id="cb1"><code class="sourceCode bash"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">brew</span> install ansible</div></code></pre>
+<p>RHel</p>
+<pre class="sourceCode bash" id="cb2"><code class="sourceCode bash"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">sudo</span> yum install ansible</div></code></pre>
+<p>Ubuntu</p>
+<pre class="sourceCode bash" id="cb3"><code class="sourceCode bash"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">sudo</span> apt-get install software-properties-common</div>
+<div class="sourceLine" id="cb3-2" data-line-number="2"><span class="fu">sudo</span> apt-add-repository ppa:ansible/ansible</div>
+<div class="sourceLine" id="cb3-3" data-line-number="3"><span class="fu">sudo</span> apt-get update</div>
+<div class="sourceLine" id="cb3-4" data-line-number="4"><span class="fu">sudo</span> apt-get install ansible</div></code></pre>
+<p>Zabbix API</p>
+<pre class="sourceCode bash" id="cb4"><code class="sourceCode bash"><div class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">pip</span> show pyzabbix</div>
+<div class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">pip</span> show zabbix-api</div></code></pre>
+<h2 id="usage">Usage</h2>
+<p>Run playbook locally</p>
+<pre class="sourceCode bash" id="cb5"><code class="sourceCode bash"><div class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">ansible-playbook</span> playbook.yml -c local</div></code></pre>
+<p>Create new role</p>
+<pre class="sourceCode bash" id="cb6"><code class="sourceCode bash"><div class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">cd</span> path/to/roles</div>
+<div class="sourceLine" id="cb6-2" data-line-number="2"><span class="ex">ansible-galaxy</span> init rolename</div></code></pre>
+<p>Install roles</p>
+<pre class="sourceCode bash" id="cb7"><code class="sourceCode bash"><div class="sourceLine" id="cb7-1" data-line-number="1"><span class="ex">ansible-galaxy</span> install rolename <span class="co"># by name</span></div>
+<div class="sourceLine" id="cb7-2" data-line-number="2"><span class="ex">ansible-galaxy</span> install -r requirements <span class="co"># from file</span></div></code></pre>
+<p>List Installed Roles in <code>roles_path</code></p>
+<pre class="sourceCode bash" id="cb8"><code class="sourceCode bash"><div class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">ansible-galaxy</span> list</div></code></pre>
+<p>Remove role</p>
+<pre class="sourceCode bash" id="cb9"><code class="sourceCode bash"><div class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">ansible-galaxy</span> remove username.rolename</div></code></pre>
+<h2 id="configuration">Configuration</h2>
+<p>Ansible looks for configuration file as follows</p>
+<pre class="sourceCode bash" id="cb10"><code class="sourceCode bash"><div class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">./ansible.cfg</span></div>
+<div class="sourceLine" id="cb10-2" data-line-number="2"><span class="ex">~/.ansible.cfg</span></div>
+<div class="sourceLine" id="cb10-3" data-line-number="3"><span class="ex">/etc/ansible/ansible.cfg</span></div></code></pre>
+<p>Make sure to add your changes to the appropriate config file.</p>
+<p>You can disable creation of retry file in ansible by modifying ansible configuration file.</p>
+<pre class="sourceCode ini" id="cb11"><code class="sourceCode ini"><div class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">[defaults]</span></div>
+<div class="sourceLine" id="cb11-2" data-line-number="2"><span class="co"># ...</span></div>
+<div class="sourceLine" id="cb11-3" data-line-number="3"><span class="dt">retry_files_enabled </span><span class="ot">=</span><span class="st"> </span><span class="kw">False</span></div></code></pre>
+<p>Specify hostfile</p>
+<pre class="sourceCode ini" id="cb12"><code class="sourceCode ini"><div class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">[defaults]</span></div>
+<div class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># ...</span></div>
+<div class="sourceLine" id="cb12-3" data-line-number="3"><span class="dt">hostfile </span><span class="ot">=</span><span class="st"> hosts</span></div></code></pre>
+<p>Change roles path. You can specify multiple directories</p>
+<pre class="sourceCode bash" id="cb13"><code class="sourceCode bash"><div class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">roles_path</span> = requirements:vendor</div></code></pre>
+</body>
+</html>

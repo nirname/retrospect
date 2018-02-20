@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>screen</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0; background-color: #ffffff; color: #a0a0a0;  padding-left: 4px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.bn { color: #b08000; } /* BaseN */
+code span.fl { color: #b08000; } /* Float */
+code span.cn { color: #aa5500; } /* Constant */
+code span.ch { color: #924c9d; } /* Char */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.st { color: #bf0303; } /* String */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.im { color: #ff5500; } /* Import */
+code span.co { color: #898887; } /* Comment */
+code span.do { color: #607880; } /* Documentation */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.ot { color: #006e28; } /* Other */
+code span.fu { color: #644a9b; } /* Function */
+code span.va { color: #0057ae; } /* Variable */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.at { color: #0057ae; } /* Attribute */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.in { color: #b08000; } /* Information */
+code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span. { color: #1f1c1b; } /* Normal */
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="screen">Screen</h1>
+<p><a href="http://aperiodic.net/screen/quick_reference" class="uri">http://aperiodic.net/screen/quick_reference</a></p>
+<h2 id="escape-key">Escape key</h2>
+<p>All screen commands are prefixed by an escape key, by default <code>C-a</code> (that’s <code>Control-a</code>, sometimes written <code>^a</code>). To send a literal <code>C-a</code> to the programs in screen, use <code>C-a a</code>. This is useful when working with screen within screen. For example <code>C-a a n</code> will move screen to a new window on the screen within screen.</p>
+<h2 id="start-a-new-screen-session-with-session-name">Start a new screen session with session name</h2>
+<pre class="sourceCode bash" id="cb1"><code class="sourceCode bash"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">screen</span> -S <span class="op">&lt;</span>name<span class="op">&gt;</span></div></code></pre>
+<h2 id="list-running">List running</h2>
+<pre class="sourceCode bash" id="cb2"><code class="sourceCode bash"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">sessions/screens</span>    screen -ls</div></code></pre>
+<h2 id="attach-to-a-running-session">Attach to a running session</h2>
+<pre class="sourceCode bash" id="cb3"><code class="sourceCode bash"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">screen</span> -x</div></code></pre>
+<h2 id="attach-to-session-with-name">Attach to session with name</h2>
+<pre class="sourceCode bash" id="cb4"><code class="sourceCode bash"><div class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">screen</span> -r <span class="op">&lt;</span>name<span class="op">&gt;</span></div></code></pre>
+<h2 id="the-ultimate-attach">The “ultimate attach”</h2>
+<p>(Attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one. If multiple sessions exist, uses the first one.)</p>
+<pre class="sourceCode bash" id="cb5"><code class="sourceCode bash"><div class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">screen</span> -dRR</div></code></pre>
+<h2 id="detach-a-running-session">Detach a running session</h2>
+<pre class="sourceCode bash" id="cb6"><code class="sourceCode bash"><div class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">screen</span> -d <span class="op">&lt;</span>name<span class="op">&gt;</span></div></code></pre>
+<h2 id="getting-out">Getting out</h2>
+<pre class="sourceCode bash" id="cb7"><code class="sourceCode bash"><div class="sourceLine" id="cb7-1" data-line-number="1"><span class="ex">detach</span> C-a d</div></code></pre>
+<ul>
+<li>detach and logout (quick exit) <code>C-a D D</code></li>
+<li>exit screen <code>C-a \</code> Exit all of the programs in screen. (not recommended)</li>
+<li>force-exit screen <code>C-a C-\</code> (not recommended)</li>
+<li>getting out of the screen session <code>exit</code></li>
+</ul>
+</body>
+</html>

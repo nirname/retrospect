@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>git</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0; background-color: #ffffff; color: #a0a0a0;  padding-left: 4px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.bn { color: #b08000; } /* BaseN */
+code span.fl { color: #b08000; } /* Float */
+code span.cn { color: #aa5500; } /* Constant */
+code span.ch { color: #924c9d; } /* Char */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.st { color: #bf0303; } /* String */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.im { color: #ff5500; } /* Import */
+code span.co { color: #898887; } /* Comment */
+code span.do { color: #607880; } /* Documentation */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.ot { color: #006e28; } /* Other */
+code span.fu { color: #644a9b; } /* Function */
+code span.va { color: #0057ae; } /* Variable */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.at { color: #0057ae; } /* Attribute */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.in { color: #b08000; } /* Information */
+code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span. { color: #1f1c1b; } /* Normal */
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="git">GIT</h1>
+<h2 id="installation">Installation</h2>
+<pre class="sourceCode bash" id="cb1"><code class="sourceCode bash"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">apt-get</span> install git-core</div></code></pre>
+<h2 id="settings">Settings</h2>
+<h3 id="set-a-new-email">Set a new email</h3>
+<pre class="sourceCode bash" id="cb2"><code class="sourceCode bash"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">git</span> config --global user.email <span class="st">&quot;me@example.com&quot;</span></div></code></pre>
+<h3 id="verify-the-setting">Verify the setting</h3>
+<pre class="sourceCode bash" id="cb3"><code class="sourceCode bash"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">git</span> config --global user.email</div></code></pre>
+<h3 id="aliases">Aliases</h3>
+<p>Add the following to the <code>.gitconfig</code> file in your <code>$HOME</code> directory.</p>
+<pre class="sourceCode ini" id="cb4"><code class="sourceCode ini"><div class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">[alias]</span></div>
+<div class="sourceLine" id="cb4-2" data-line-number="2"><span class="dt">  co </span><span class="ot">=</span><span class="st"> checkout</span></div>
+<div class="sourceLine" id="cb4-3" data-line-number="3"><span class="dt">  cm </span><span class="ot">=</span><span class="st"> commit</span></div>
+<div class="sourceLine" id="cb4-4" data-line-number="4"><span class="dt">  st </span><span class="ot">=</span><span class="st"> status</span></div>
+<div class="sourceLine" id="cb4-5" data-line-number="5"><span class="dt">  br </span><span class="ot">=</span><span class="st"> branch</span></div>
+<div class="sourceLine" id="cb4-6" data-line-number="6"><span class="dt">  mr </span><span class="ot">=</span><span class="st"> merge</span></div>
+<div class="sourceLine" id="cb4-7" data-line-number="7"><span class="dt">  hist </span><span class="ot">=</span><span class="st"> log --pretty=format:\&quot;%h %ad | %s%d [%an]\&quot; --graph --date=short</span></div>
+<div class="sourceLine" id="cb4-8" data-line-number="8"><span class="dt">  type </span><span class="ot">=</span><span class="st"> cat-file -t</span></div>
+<div class="sourceLine" id="cb4-9" data-line-number="9"><span class="dt">  dump </span><span class="ot">=</span><span class="st"> cat-file -p</span></div>
+<div class="sourceLine" id="cb4-10" data-line-number="10"><span class="dt">  ignore </span><span class="ot">=</span><span class="st"> update-index --assume-unchanged</span></div>
+<div class="sourceLine" id="cb4-11" data-line-number="11"><span class="dt">  unignore </span><span class="ot">=</span><span class="st"> update-index --</span><span class="kw">no</span><span class="st">-assume-unchanged</span></div>
+<div class="sourceLine" id="cb4-12" data-line-number="12"><span class="dt">  ignored </span><span class="ot">=</span><span class="st"> !git ls-files -v | grep &quot;^[[:lower:]]&quot;</span></div>
+<div class="sourceLine" id="cb4-13" data-line-number="13"><span class="kw">[core]</span></div>
+<div class="sourceLine" id="cb4-14" data-line-number="14"><span class="dt">  excludesfile </span><span class="ot">=</span><span class="st"> ~/.gitignore</span></div></code></pre>
+<h3 id="diff-with-meld">Diff with Meld</h3>
+<p>Install <code>meld</code></p>
+<pre class="sourceCode bash" id="cb5"><code class="sourceCode bash"><div class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">sudo</span> apt-get install meld</div></code></pre>
+<p>Add the following to the <code>.gitconfig</code> file in your <code>$HOME</code> directory.</p>
+<pre class="sourceCode ini" id="cb6"><code class="sourceCode ini"><div class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">[diff]</span></div>
+<div class="sourceLine" id="cb6-2" data-line-number="2"><span class="dt">  external </span><span class="ot">=</span><span class="st"> ~/diff.py</span></div></code></pre>
+<p>Put <code>diff.py</code> in your home directory</p>
+<pre class="sourceCode python" id="cb7"><code class="sourceCode python"><div class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">#!/usr/bin/python</span></div>
+<div class="sourceLine" id="cb7-2" data-line-number="2"></div>
+<div class="sourceLine" id="cb7-3" data-line-number="3"><span class="im">import</span> sys</div>
+<div class="sourceLine" id="cb7-4" data-line-number="4"><span class="im">import</span> os</div>
+<div class="sourceLine" id="cb7-5" data-line-number="5"></div>
+<div class="sourceLine" id="cb7-6" data-line-number="6">os.system(<span class="st">&#39;meld &quot;</span><span class="sc">%s</span><span class="st">&quot; &quot;</span><span class="sc">%s</span><span class="st">&quot;&#39;</span> <span class="op">%</span> (sys.argv[<span class="dv">2</span>], sys.argv[<span class="dv">5</span>]))</div></code></pre>
+<p>Make it executable</p>
+<pre class="sourceCode bash" id="cb8"><code class="sourceCode bash"><div class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">chmod</span> 755 ~/diff.py</div></code></pre>
+<p>Add to <code>~/.gitconfig</code></p>
+<pre class="sourceCode ini" id="cb9"><code class="sourceCode ini"><div class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">[diff]</span></div>
+<div class="sourceLine" id="cb9-2" data-line-number="2"><span class="dt">  external </span><span class="ot">=</span><span class="st"> ~/diff.py</span></div>
+<div class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">[merge]</span></div>
+<div class="sourceLine" id="cb9-4" data-line-number="4"><span class="dt">  tool </span><span class="ot">=</span><span class="st"> meld</span></div></code></pre>
+<h2 id="commands">Commands</h2>
+<h3 id="reverse-diff">Reverse diff</h3>
+<pre class="sourceCode bash" id="cb10"><code class="sourceCode bash"><div class="sourceLine" id="cb10-1" data-line-number="1"><span class="fu">git</span> diff -R stash@<span class="dt">{0}</span></div></code></pre>
+<h3 id="remove-branch">Remove branch</h3>
+<pre class="sourceCode bash" id="cb11"><code class="sourceCode bash"><div class="sourceLine" id="cb11-1" data-line-number="1"><span class="fu">git</span> branch -d feature <span class="co"># locally</span></div>
+<div class="sourceLine" id="cb11-2" data-line-number="2"><span class="fu">git</span> push origin :feature <span class="co"># from remote</span></div></code></pre>
+<h3 id="remove-only-tag">Remove only tag</h3>
+<pre class="sourceCode bash" id="cb12"><code class="sourceCode bash"><div class="sourceLine" id="cb12-1" data-line-number="1"><span class="fu">git</span> tag -d 12345 <span class="co"># locally</span></div>
+<div class="sourceLine" id="cb12-2" data-line-number="2"><span class="fu">git</span> push origin :refs/tags/12345 <span class="co"># from remote</span></div></code></pre>
+<h3 id="create-repository-available-for-pushes">Create repository available for pushes</h3>
+<pre class="sourceCode bash" id="cb13"><code class="sourceCode bash"><div class="sourceLine" id="cb13-1" data-line-number="1"><span class="fu">git</span> init --bare</div></code></pre>
+<h3 id="turn-an-existing-non-bare-repository-into-a-bare">Turn an existing “non-bare” repository into a “bare”<br/></h3>
+<p>(without working directory)</p>
+<pre class="sourceCode bash" id="cb14"><code class="sourceCode bash"><div class="sourceLine" id="cb14-1" data-line-number="1"><span class="fu">git</span> clone --bare -l non_bare_repo new_bare_repo</div></code></pre>
+<h3 id="turn-an-existing-bare-repository-into-a-non-bare">Turn an existing “bare” repository into a “non-bare”<br/></h3>
+<p>(with working directory)</p>
+<pre class="sourceCode bash" id="cb15"><code class="sourceCode bash"><div class="sourceLine" id="cb15-1" data-line-number="1"><span class="fu">git</span> clone</div></code></pre>
+<h3 id="reset-the-entire-repository-to-the-last-committed-state">Reset the entire repository to the last committed state:</h3>
+<pre class="sourceCode bash" id="cb16"><code class="sourceCode bash"><div class="sourceLine" id="cb16-1" data-line-number="1"><span class="fu">git</span> reset --hard</div></code></pre>
+<h3 id="remove-untracked-files">Remove untracked files</h3>
+<pre class="sourceCode bash" id="cb17"><code class="sourceCode bash"><div class="sourceLine" id="cb17-1" data-line-number="1"><span class="fu">git</span> clean -d -x -f</div>
+<div class="sourceLine" id="cb17-2" data-line-number="2"></div>
+<div class="sourceLine" id="cb17-3" data-line-number="3"><span class="co"># including directories (-d)</span></div>
+<div class="sourceLine" id="cb17-4" data-line-number="4"><span class="co"># ignored files (-x)</span></div>
+<div class="sourceLine" id="cb17-5" data-line-number="5"><span class="co"># -f argument with</span></div>
+<div class="sourceLine" id="cb17-6" data-line-number="6"><span class="co"># -n to perform a dry-run</span></div>
+<div class="sourceLine" id="cb17-7" data-line-number="7"><span class="co"># or -i for interactive mode and it will tell you what will be removed.</span></div></code></pre>
+<h3 id="checkout-to-branch-with-different-name">Checkout to branch with different name</h3>
+<pre class="sourceCode bash" id="cb18"><code class="sourceCode bash"><div class="sourceLine" id="cb18-1" data-line-number="1"><span class="fu">git</span> co -b local-branch remote/remote-branch</div></code></pre>
+<h3 id="pushing-to-a-remote-branch-with-a-different-name">Pushing to a Remote Branch with a Different Name</h3>
+<pre class="sourceCode bash" id="cb19"><code class="sourceCode bash"><div class="sourceLine" id="cb19-1" data-line-number="1"><span class="fu">git</span> push origin local-name:remote-name.</div></code></pre>
+<p>Easy way:</p>
+<p>Set push.default to upstream to push branches to their upstreams (which is the same that pull will pull from, defined by branch.newb.merge), rather than pushing branches to ones matching in name (which is the default setting for push.default, matching)</p>
+<pre class="sourceCode bash" id="cb20"><code class="sourceCode bash"><div class="sourceLine" id="cb20-1" data-line-number="1"><span class="fu">git</span> config push.default upstream</div></code></pre>
+<p>Note that this used to be called tracking not upstream before Git 1.7.4.2, so if you’re using an older version of Git, use tracking instead. The push.default option was added in Git 1.6.4, so if you’re on an older version than that, you won’t have this option at all and will need to explicitly specify the branch to push to.</p>
+<h2 id="rebase-and-resolving-conflicts">Rebase and resolving conflicts</h2>
+<p>How to resolve conflict while doing rebase.</p>
+<p>Choose priority of file while doing <code>rebase</code></p>
+<pre class="sourceCode bash" id="cb21"><code class="sourceCode bash"><div class="sourceLine" id="cb21-1" data-line-number="1"><span class="fu">git</span> checkout --ours index.html</div>
+<div class="sourceLine" id="cb21-2" data-line-number="2"><span class="fu">git</span> checkout --theirs _layouts/default.html</div></code></pre>
+<p>Sadly, these options are only in Git versions 1.6.1 and up. If you have an older version and don’t feel like upgrading, there’s ways to get around this.</p>
+<p>To emulate <code>--theirs</code>, we’d do:</p>
+<pre class="sourceCode bash" id="cb22"><code class="sourceCode bash"><div class="sourceLine" id="cb22-1" data-line-number="1"><span class="fu">git</span> reset -- _layouts/default.html</div>
+<div class="sourceLine" id="cb22-2" data-line-number="2"><span class="fu">git</span> checkout MERGE_HEAD -- _layouts/default.html</div></code></pre>
+<p>And for <code>--ours</code>:</p>
+<pre class="sourceCode bash" id="cb23"><code class="sourceCode bash"><div class="sourceLine" id="cb23-1" data-line-number="1"><span class="fu">git</span> reset -- index.html</div>
+<div class="sourceLine" id="cb23-2" data-line-number="2"><span class="fu">git</span> checkout ORIG_HEAD -- index.html</div></code></pre>
+<h2 id="ignoring">Ignoring</h2>
+<h3 id="reverse-ignoring">Reverse ignoring</h3>
+<pre><code>* # ignore all
+!/templates # don&#39;t ignore directory
+!/templates/* # and files inside</code></pre>
+<h3 id="per-project">Per Project</h3>
+<p>Use <code>.gitignore</code> file in the repository</p>
+<h3 id="per-repository">Per Repository</h3>
+<p>You can exclude files on a per repository basis by editing the <code>.git/info/excludes</code> file in your repository</p>
+<h3 id="per-computer-through-settings-in-.gitconfig">Per Computer: through settings in ~/.gitconfig</h3>
+<p>In <code>.gitconfig</code> file under the <code>[core]</code> section add the path to file for the <code>excludesfile</code> key:</p>
+<pre class="sourceCode ini" id="cb25"><code class="sourceCode ini"><div class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">[core]</span></div>
+<div class="sourceLine" id="cb25-2" data-line-number="2"><span class="dt">  excludesfile </span><span class="ot">=</span><span class="st"> ~/.gitignore</span></div></code></pre>
+<h2 id="subtrees">Subtrees</h2>
+<h3 id="add-subtree">Add subtree</h3>
+<p>Пример из документации: добавляем код из ветки master репозитория Bproject (лежит в /path/to/B) в наш проект в поддиректорию dir-B/.</p>
+<pre class="sourceCode bash" id="cb26"><code class="sourceCode bash"><div class="sourceLine" id="cb26-1" data-line-number="1"><span class="fu">git</span> remote add -f Bproject /path/to/B</div>
+<div class="sourceLine" id="cb26-2" data-line-number="2"><span class="fu">git</span> merge -s subtree --no-commit Bproject/master</div>
+<div class="sourceLine" id="cb26-3" data-line-number="3"><span class="fu">git</span> read-tree --prefix=dir-B/ -u Bproject/master</div>
+<div class="sourceLine" id="cb26-4" data-line-number="4"><span class="fu">git</span> commit -m <span class="st">&quot;Merge B project as our subdirectory&quot;</span></div></code></pre>
+<p>Если не ходим делать лишних коммитов, используем –squash</p>
+<pre class="sourceCode bash" id="cb27"><code class="sourceCode bash"><div class="sourceLine" id="cb27-1" data-line-number="1"><span class="fu">git</span> merge --squash -s subtree --no-commit Bproject/master</div></code></pre>
+<p>Нужно обратить внимание на ключ -f у git remote add. Он говорит гиту сразу сделать fetch этого remote-а.</p>
+<p>В дальнейшем, изменения в Bproject подтягиваются командой git pull с явным указанием нужной ветки и стратегии объединения:</p>
+<pre><code>$ git pull -s subtree Bproject master</code></pre>
+<p>Если в рабочей копии не добавлен соответствующий remote-у поддерева, в истории основного репозитория не показывается имя ветки, из которой притянуты изменения.</p>
+<p>Проблема чисто косметическая, и на работу не влияет. Лечится добавлением этого remote-а в рабочую копию:</p>
+<pre><code>$ git remote add -f Bproject /path/to/B</code></pre>
+<p>В дальнейшем, если появляются новые ветки, можно подтягивать изменения в remote:</p>
+<pre><code>$ git fetch Bproject</code></pre>
+<h3 id="extract-as-subtree">Extract as subtree</h3>
+<pre><code>git checkout subbranch
+git filter-branch --subdirectory-filter subdirectory -- --all
+git filter-branch --subdirectory-filter doc -- --all</code></pre>
+<h2 id="spesifying-revisions">Spesifying Revisions</h2>
+<p>See <a href="http://schacon.github.io/git/git-rev-parse#_specifying_revisions">git-rev-parse</a>.</p>
+<p>Here is an illustration, by Jon Loeliger. Both commit nodes B and C are parents of commit node A. Parent commits are ordered left-to-right.</p>
+<figure>
+<embed src="git-revisions.svg" /><figcaption>Git revisions</figcaption>
+</figure>
+<pre><code>A =      = A^0
+B = A^   = A^1     = A~1
+C = A^2  = A^2
+D = A^^  = A^1^1   = A~2
+E = B^2  = A^^2
+F = B^3  = A^^3
+G = A^^^ = A^1^1^1 = A~3
+H = D^2  = B^^2    = A^^^2  = A~2^2
+I = F^   = B^3^    = A^^3^
+J = F^2  = B^3^2   = A^^3^2</code></pre>
+</body>
+</html>

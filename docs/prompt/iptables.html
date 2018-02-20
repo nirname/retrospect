@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>iptables</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="ip-tables">IP Tables</h1>
+<pre><code>vi /etc/sysconfig/iptables</code></pre>
+<h2 id="saving-iptables-rules">Saving IPTables Rules</h2>
+<p>Rules created with the iptables command are stored in memory. If the system is restarted before saving the iptables rule set, all rules are lost. For netfilter rules to persist through a system reboot, they need to be saved. To save netfilter rules, type the following command as root:</p>
+<pre><code>/sbin/service iptables save</code></pre>
+<p>This executes the iptables init script, which runs the <code>/sbin/iptables-save</code> program and writes the current iptables configuration to <code>/etc/sysconfig/iptables</code>. The existing /etc/sysconfig/iptables file is saved as <code>/etc/sysconfig/iptables.save</code>.</p>
+<p>The next time the system boots, the iptables init script reapplies the rules saved in <code>/etc/sysconfig/iptables</code> by using the <code>/sbin/iptables-restore</code> command.</p>
+<p>While it is always a good idea to test a new iptables rule before committing it to the <code>/etc/sysconfig/iptables</code> file, it is possible to copy iptables rules into this file from another system’s version of this file. This provides a quick way to distribute sets of iptables rules to multiple machines.</p>
+<p>You can also save the iptables rules to a separate file for distribution, backup or other purposes. To save your iptables rules, type the following command as root:</p>
+<pre><code>iptables-save &gt; &lt;filename&gt;
+where &lt;filename&gt; is a user-defined name for your ruleset.</code></pre>
+</body>
+</html>

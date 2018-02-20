@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ubuntu</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="ubuntu">Ubuntu</h1>
+<h2 id="old-releases">Old releases</h2>
+<p>If your release is unsupported and you cannot use <code>apt-get</code> then set other software sources:</p>
+<pre><code>sudo sed -i -e &#39;s/ca.archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g&#39; /etc/apt/sources.list</code></pre>
+<h2 id="how-to-check-version-of-ubuntu">How to check version of ubuntu</h2>
+<pre><code>uname -a
+lsb_release -a</code></pre>
+<h2 id="managing-users">Managing users</h2>
+<pre><code>sudo useradd user
+sudo useradd -m username -s /bin/bash
+sudo passwd username
+
+sudo usermod -a -G sudo user</code></pre>
+<h2 id="generate-password">Generate password</h2>
+<pre><code>pwgen -syn 10 1</code></pre>
+<h2 id="encrypting-files">Encrypting files</h2>
+<pre><code>gpg -c file
+gpg --decrypt file</code></pre>
+<h2 id="output-middle-of-a-file">Output middle of a file</h2>
+<pre><code>tail -n +5 file # from specific line
+|
+head -n 5 # till specific line</code></pre>
+<h2 id="print-one-file-at-one-line">Print one file at one line</h2>
+<pre><code>ls -1</code></pre>
+<h2 id="copy-the-last-file-to-new-named-by-date">Copy the last file to new named by date</h2>
+<pre><code>ls -Q | sort | tail -n 1 | xargs cat &gt; &quot;`date +tasks\ %Y-%m-%d.txt`&quot;</code></pre>
+<h2 id="list-of-opened-ports">List of opened ports</h2>
+<pre><code>sudo lsof -i
+sudo netstat -lptu
+sudo netstat -tulpn</code></pre>
+<h2 id="directory-of-shell-command">Directory of shell command</h2>
+<pre><code>type -a command</code></pre>
+<h1 id="making-scripts-run-at-boot-time-with-debian">Making scripts run at boot time with Debian</h1>
+<p>Posted by Steve on Mon 11 Oct 2004 at 13:01 Tags: boot, debian-specific commands, initscripts, scheduling</p>
+<p>Debian uses a Sys-V like init system for executing commands when the system runlevel changes - for example at bootup and shutdown time.</p>
+<p>If you wish to add a new service to start when the machine boots you should add the necessary script to the directory /etc/init.d/. Many of the scripts already present in that directory will give you an example of the kind of things that you can do.</p>
+<p>Here’s a very simple script which is divided into two parts, code which always runs, and code which runs when called with “start” or “stop”.</p>
+<pre><code>#! /bin/sh
+# /etc/init.d/blah
+#
+
+# Some things that run always
+touch /var/lock/blah
+
+# Carry out specific functions when asked to by the system
+case &quot;$1&quot; in
+  start)
+    echo &quot;Starting script blah &quot;
+    echo &quot;Could do more here&quot;
+    ;;
+  stop)
+    echo &quot;Stopping script blah&quot;
+    echo &quot;Could do more here&quot;
+    ;;
+  *)
+    echo &quot;Usage: /etc/init.d/blah {start|stop}&quot;
+    exit 1
+    ;;
+esac
+
+exit 0</code></pre>
+<p>Once you’ve saved your file into the correct location make sure that it’s executable by running “chmod 755 /etc/init.d/blah”.</p>
+<p>Then you need to add the appropriate symbolic links to cause the script to be executed when the system goes down, or comes up.</p>
+<p>The simplest way of doing this is to use the Debian-specific command update-rc.d:</p>
+<pre><code>root@skx:~# update-rc.d blah defaults
+ Adding system startup for /etc/init.d/blah ...
+   /etc/rc0.d/K20blah -&gt; ../init.d/blah
+   /etc/rc1.d/K20blah -&gt; ../init.d/blah
+   /etc/rc6.d/K20blah -&gt; ../init.d/blah
+   /etc/rc2.d/S20blah -&gt; ../init.d/blah
+   /etc/rc3.d/S20blah -&gt; ../init.d/blah
+   /etc/rc4.d/S20blah -&gt; ../init.d/blah
+   /etc/rc5.d/S20blah -&gt; ../init.d/blah</code></pre>
+<p>If you wish to remove the script from the startup sequence in the future run:</p>
+<pre><code>root@skx:/etc/rc2.d# update-rc.d -f  blah remove
+update-rc.d: /etc/init.d/blah exists during rc.d purge (continuing)
+ Removing any system startup links for /etc/init.d/blah ...
+   /etc/rc0.d/K20blah
+   /etc/rc1.d/K20blah
+   /etc/rc2.d/S20blah
+   /etc/rc3.d/S20blah
+   /etc/rc4.d/S20blah
+   /etc/rc5.d/S20blah
+   /etc/rc6.d/K20blah</code></pre>
+<p>This will leave the script itself in place, just remove the links which cause it to be executed.</p>
+<p>You can find more details of this command by running “man update-rc.d”.</p>
+</body>
+</html>

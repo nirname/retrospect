@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>flash_player</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="/assets/github-markdown.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="flash-player">Flash player</h1>
+<p>Если по какой то причине вы не хотите устанавливать пакет adobe-flashplugin с Adobe Flash Player, вы можете совершить установку вручную. Для этого загрузите архив по ссылке (версия .tar.gz) в домашний каталог. После этого распакуйте содержимое архива в папку с плагинами браузеров. Для этого выполните следующие команды в терминале:</p>
+<pre><code>sudo tar xvzf install_flash_player_11_linux.i386.tar.gz -C /usr/lib/mozilla/plugins
+sudo rm -r /usr/lib/mozilla/plugins/usr</code></pre>
+<p>За работу Adobe Flash Player отвечает файл /usr/lib/mozilla/plugins/libflashplayer.so. Он будет обнаружен вашим браузером при следующем запуске.</p>
+</body>
+</html>
