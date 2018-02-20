@@ -1,61 +1,144 @@
 # 'Makefile'
 
 # Where sources are located
-SOURCES_DIR = .
+SOURCE_DIR = source
 # Where all the compiled sources will be
-OBJECTS_DIR = docs
+TARGET_DIR = docs
 
 # Where assets are located
 ASSETS_DIR = assets
 # Where all the compiled assets will be
-BUILDS_DIR = $(OBJECTS_DIR)/$(ASSETS_DIR)
+BUILDS_DIR = $(TARGET_DIR)/$(ASSETS_DIR)
 
 # use --toc option generate links to anchors
-MD = pandoc --data-dir=$(CURDIR) --from markdown \
-	--css $(ASSETS_DIR)/github-markdown.css\
-	--css $(ASSETS_DIR)/documentary.css \
-	--css $(ASSETS_DIR)/highlight/styles/default.css \
-	--template documentary.html --standalone \
-	--filter ./graphviz.py
+MD = pandoc --data-dir=$(CURDIR) \
+	--from markdown --standalone --quiet \
+	--css $(ASSETS_DIR)/github-markdown.css \
+	--highlight-style kate \
+	--filter plugins/graphviz.py \
+	--filter plugins/diag.py
+
+	# --filter pandoc-imagine
+
+# pygments
+# tango
+# espresso
+# zenburn
+# kate
+# monochrome
+# breezedark
+# haddock
+
+	# --css $(ASSETS_DIR)/github.css \
+	# --css $(ASSETS_DIR)/documentary.css \
+	# --template documentary.html \
+	# --css $(ASSETS_DIR)/github-pandoc.css\
+	# --css $(ASSETS_DIR)/buttondown.css \
+	# --css $(ASSETS_DIR)/highlight.css \
 
 DOT = dot -Tsvg
+NEATO = neato -Tsvg
+FDP = fdp -Tsvg
+SFDT = sfdp -Tsvg
+TWOPI = twopi -Tsvg
+CIRCO = circo -Tsvg
+SEQ = seqdiag -Tsvg
 
-CSS_ASSETS = $(shell find $(ASSETS_DIR) -name '*.css' | cut -sd / -f 2-)
-CSS_BUILDS = $(CSS_ASSETS:%.css=$(BUILDS_DIR)/%.css)
+ASSETS_SOURCES = $(shell find $(ASSETS_DIR) -type f | grep -E ".*(css|js|woff|ttf|eot)" | cut -sd / -f 2-)
+ASSETS_TARGETS = $(ASSETS_SOURCES:%=$(BUILDS_DIR)/%)
 
-JS_ASSETS = $(shell find $(ASSETS_DIR) -name '*.js' | cut -sd / -f 2-)
-JS_BUILDS = $(JS_ASSETS:%.js=$(BUILDS_DIR)/%.js)
+MD_SOURCES = $(shell find $(SOURCE_DIR) -name '*.md' | cut -sd / -f 2-)
+MD_TARGETS = $(MD_SOURCES:%.md=$(TARGET_DIR)/%.html)
 
-MD_SOURCES = $(shell find $(SOURCES_DIR) -name '*.md' | cut -sd / -f 2-)
-HTML_OBJECTS = $(MD_SOURCES:%.md=$(OBJECTS_DIR)/%.html)
+DOT_SOURCES = $(shell find $(SOURCE_DIR) -name '*.dot' | cut -sd / -f 2-)
+DOT_TARGETS = $(DOT_SOURCES:%.dot=$(TARGET_DIR)/%.svg)
 
-DOT_SOURCES = $(shell find $(SOURCES_DIR) -name '*.dot' | cut -sd / -f 2-)
-DOT_OBJECTS = $(DOT_SOURCES:%.dot=$(OBJECTS_DIR)/%.svg)
+NEATO_SOURCES = $(shell find $(SOURCE_DIR) -name '*.neato' | cut -sd / -f 2-)
+NEATO_TARGETS = $(NEATO_SOURCES:%.neato=$(TARGET_DIR)/%.svg)
 
-all: assets sources
-# @echo "Done"
+FDP_SOURCES = $(shell find $(SOURCE_DIR) -name '*.fdp' | cut -sd / -f 2-)
+FDP_TARGETS = $(FDP_SOURCES:%.dot=$(TARGET_DIR)/%.svg)
 
-assets: $(CSS_BUILDS) $(JS_BUILDS)
+SFDP_SOURCES = $(shell find $(SOURCE_DIR) -name '*.sfdp' | cut -sd / -f 2-)
+SFDP_TARGETS = $(SFDP_SOURCES:%.sfdp=$(TARGET_DIR)/%.svg)
 
-$(BUILDS_DIR)/%.css: $(ASSETS_DIR)/%.css
+TWOPI_SOURCES = $(shell find $(SOURCE_DIR) -name '*.twopi' | cut -sd / -f 2-)
+TWOPI_TARGETS = $(TWOPI_SOURCES:%.twopi=$(TARGET_DIR)/%.svg)
+
+CIRCO_SOURCES = $(shell find $(SOURCE_DIR) -name '*.circo' | cut -sd / -f 2-)
+CIRCO_TARGETS = $(CIRCO_SOURCES:%.circo=$(TARGET_DIR)/%.svg)
+
+SEQ_SOURCES = $(shell find $(SOURCE_DIR) -name '*.seq' | cut -sd / -f 2-)
+SEQ_TARGETS = $(SEQ_SOURCES:%.seq=$(TARGET_DIR)/%.svg)
+
+all: assets sources no_jekyll
+
+no_jekyll: $(TARGET_DIR)/.no_jekyll
+
+$(TARGET_DIR)/.no_jekyll:
+	touch $@
+
+assets: $(ASSETS_TARGETS)
+
+$(ASSETS_TARGETS): $(BUILDS_DIR)/%: $(ASSETS_DIR)/%
 	@mkdir -p $(@D)
 	cp -f $< $@
 
-$(BUILDS_DIR)/%.js: $(ASSETS_DIR)/%.js
-	@mkdir -p $(@D)
-	cp -f $< $@
+sources: \
+	$(MD_TARGETS) \
+	$(DOT_TARGETS) \
+	$(NEATO_TARGETS) \
+	$(FDP_TARGETS) \
+	$(SFDP_TARGETS) \
+	$(TWOPI_TARGETS) \
+	$(CIRCO_TARGETS) \
+	$(SEQ_TARGETS)
 
-sources: $(HTML_OBJECTS) $(DOT_OBJECTS)
-
-$(OBJECTS_DIR)/%.html: $(SOURCES_DIR)/%.md $(SOURCES_DIR)/makefile $(SOURCES_DIR)/graphviz.py templates/documentary.html
+$(TARGET_DIR)/%.html: $(SOURCE_DIR)/%.md makefile plugins/graphviz.py
 	@mkdir -p $(@D)
 	$(MD) --to html5 $< --output $@
 	@sed -i '' -e '/href="./s/\.md/\.html/g' $@
+	@sed -i '' -e '/href="./s/\.dot/\.svg/g' $@
+	@sed -i '' -e '/href="./s/\.neato/\.svg/g' $@
+	@sed -i '' -e '/href="./s/\.fdp/\.svg/g' $@
+	@sed -i '' -e '/href="./s/\.sfdp/\.svg/g' $@
+	@sed -i '' -e '/href="./s/\.twopi/\.svg/g' $@
+	@sed -i '' -e '/href="./s/\.circo/\.svg/g' $@
 	@sed -i '' -e '/src="./s/\.dot/\.svg/g' $@
+	@sed -i '' -e '/src="./s/\.neato/\.svg/g' $@
+	@sed -i '' -e '/src="./s/\.fdp/\.svg/g' $@
+	@sed -i '' -e '/src="./s/\.sfdp/\.svg/g' $@
+	@sed -i '' -e '/src="./s/\.twopi/\.svg/g' $@
+	@sed -i '' -e '/src="./s/\.circo/\.svg/g' $@
+	@sed -i '' -e '/src="./s/\.seq/\.svg/g' $@
 
-$(OBJECTS_DIR)/%.svg: $(SOURCES_DIR)/%.dot makefile
+$(DOT_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.dot makefile
 	@mkdir -p $(@D)
 	$(DOT) $< -o $@
+
+$(NEATO_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.neato makefile
+	@mkdir -p $(@D)
+	$(NEATO) $< -o $@
+
+$(FDP_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.fdp makefile
+	@mkdir -p $(@D)
+	$(FDP) $< -o $@
+
+$(SFDP_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.sfdp makefile
+	@mkdir -p $(@D)
+	$(SFDP) $< -o $@
+
+$(TWOPI_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.twopi makefile
+	@mkdir -p $(@D)
+	$(TWOPI) $< -o $@
+
+$(CIRCO_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.circo makefile
+	@mkdir -p $(@D)
+	$(CIRCO) $< -o $@
+
+$(SEQ_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.seq makefile
+	@mkdir -p $(@D)
+	$(SEQ) $< -o $@
 
 PHONY: watch serve clean debug
 
@@ -63,28 +146,12 @@ watch:
 	(while true; do make; sleep 1; done) | grep -v 'make\[1\]'
 
 serve:
-	cd $(OBJECTS_DIR) && python -m SimpleHTTPServer 8000
+	cd $(TARGET_DIR) && python -m SimpleHTTPServer 8000
 
 clean:
-	rm -rf $(OBJECTS_DIR)
-
-# clean: clean_builds clean_objects clean_dir
-
-# clean_builds:
-# 	- rm $(CSS_BUILDS)
-
-# clean_objects:
-# 	- rm $(HTML_OBJECTS)
-
-# clean_dir:
-# 	- find $(OBJECTS_DIR) -type d -empty -delete
+	rm -rf $(TARGET_DIR)/*
 
 debug:
-	@echo $(JS_ASSETS)
-	@echo $(JS_BUILDS)
-# @echo $(CSS_ASSETS)
-# @echo $(CSS_BUILDS)
-# @echo $(MD_SOURCES)
-# @echo $(HTML_OBJECTS)
-# @echo $(DOT_OBJECTS)
-# @echo $(DOT_SOURCES)
+	@echo $(ASSETS_TARGETS)
+	@echo $(MD_TARGETS)
+	@echo $(DOT_TARGETS)
