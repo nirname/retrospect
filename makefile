@@ -10,25 +10,13 @@ ASSETS_DIR = assets
 # Where all the compiled assets will be
 BUILDS_DIR = $(TARGET_DIR)/$(ASSETS_DIR)
 
-# use --toc option generate links to anchors
 # TODO: fix --css / absolute path
 MD = pandoc --data-dir=$(CURDIR) \
 	--from markdown --standalone --quiet \
-	--css assets/github-markdown.css \
 	--highlight-style kate \
 	--filter plugins/graphviz.py \
 	--filter plugins/diag.py
-
-	# --filter pandoc-imagine
-
-# pygments
-# tango
-# espresso
-# zenburn
-# kate
-# monochrome
-# breezedark
-# haddock
+	# --css assets/github-markdown.css \
 
 DOT = dot -Tsvg
 NEATO = neato -Tsvg
@@ -38,8 +26,11 @@ TWOPI = twopi -Tsvg
 CIRCO = circo -Tsvg
 SEQ = seqdiag -Tsvg
 
-ASSETS_SOURCES = $(shell find $(ASSETS_DIR) -type f | grep -E ".*(css|js|woff|ttf|eot)" | cut -sd / -f 2-)
-ASSETS_TARGETS = $(ASSETS_SOURCES:%=$(BUILDS_DIR)/%)
+# ASSETS_SOURCES = $(shell find $(ASSETS_DIR) -type f | grep -E ".*(css|js|woff|ttf|eot)" | cut -sd / -f 2-)
+# ASSETS_TARGETS = $(ASSETS_SOURCES:%=$(BUILDS_DIR)/%)
+
+CSS_SOURCES = $(shell find $(SOURCE_DIR) -name '*.css' | cut -sd / -f 2-)
+CSS_TARGETS = $(CSS_SOURCES:%.css=$(TARGET_DIR)/%.css)
 
 MD_SOURCES = $(shell find $(SOURCE_DIR) -name '*.md' | cut -sd / -f 2-)
 MD_TARGETS = $(MD_SOURCES:%.md=$(TARGET_DIR)/%.html)
@@ -79,6 +70,7 @@ $(ASSETS_TARGETS): $(BUILDS_DIR)/%: $(ASSETS_DIR)/%
 	cp -f $< $@
 
 sources: \
+	$(CSS_TARGETS) \
 	$(MD_TARGETS) \
 	$(DOT_TARGETS) \
 	$(NEATO_TARGETS) \
@@ -88,7 +80,11 @@ sources: \
 	$(CIRCO_TARGETS) \
 	$(SEQ_TARGETS)
 
-$(TARGET_DIR)/%.html: $(SOURCE_DIR)/%.md makefile plugins/graphviz.py
+$(CSS_TARGETS):$(TARGET_DIR)/%.css: $(SOURCE_DIR)/%.css makefile
+	@mkdir -p $(@D)
+	cp -f $< $@
+
+$(TARGET_DIR)/%.html: $(SOURCE_DIR)/%.md makefile plugins/*.py
 	@mkdir -p $(@D)
 	$(MD) --to html5 $< --output $@
 	@sed -i '' -e '/href="./s/\.md/\.html/g' $@
@@ -146,6 +142,5 @@ clean:
 	rm -rf $(TARGET_DIR)/*
 
 debug:
-	@echo $(ASSETS_TARGETS)
-	@echo $(MD_TARGETS)
-	@echo $(DOT_TARGETS)
+	@echo $(CSS_SOURCES)
+	@echo $(CSS_TARGETS)
