@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="assets/github-markdown.css">
-
 ---
 title: Retrospect
 ---

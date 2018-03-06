@@ -6,9 +6,9 @@ SOURCE_DIR = source
 TARGET_DIR = docs
 
 # Where assets are located
-ASSETS_DIR = assets
+# ASSETS_DIR = assets
 # Where all the compiled assets will be
-BUILDS_DIR = $(TARGET_DIR)/$(ASSETS_DIR)
+# BUILDS_DIR = $(TARGET_DIR)/$(ASSETS_DIR)
 
 # TODO: fix --css / absolute path
 MD = pandoc --data-dir=$(CURDIR) \
@@ -56,18 +56,19 @@ CIRCO_TARGETS = $(CIRCO_SOURCES:%.circo=$(TARGET_DIR)/%.svg)
 SEQ_SOURCES = $(shell find $(SOURCE_DIR) -name '*.seq' | cut -sd / -f 2-)
 SEQ_TARGETS = $(SEQ_SOURCES:%.seq=$(TARGET_DIR)/%.svg)
 
-all: assets sources no_jekyll
+all: sources no_jekyll
+# assets
 
 no_jekyll: $(TARGET_DIR)/.no_jekyll
 
 $(TARGET_DIR)/.no_jekyll:
 	touch $@
 
-assets: $(ASSETS_TARGETS)
+# assets: $(ASSETS_TARGETS)
 
-$(ASSETS_TARGETS): $(BUILDS_DIR)/%: $(ASSETS_DIR)/%
-	@mkdir -p $(@D)
-	cp -f $< $@
+# $(ASSETS_TARGETS): $(BUILDS_DIR)/%: $(ASSETS_DIR)/%
+# 	@mkdir -p $(@D)
+# 	cp -f $< $@
 
 sources: \
 	$(CSS_TARGETS) \
@@ -86,7 +87,7 @@ $(CSS_TARGETS):$(TARGET_DIR)/%.css: $(SOURCE_DIR)/%.css makefile
 
 $(MD_TARGETS):$(TARGET_DIR)/%.html: $(SOURCE_DIR)/%.md makefile plugins/*.py
 	@mkdir -p $(@D)
-	$(MD) --to html5 $< --output $@
+	$(MD) $(foreach var,$(CSS_TARGETS), --css `python plugins/relpath.py $(var) $@`) --to html5 $< --output $@
 	@sed -i '' -e '/href="./s/\.md/\.html/g' $@
 	@sed -i '' -e '/href="./s/\.dot/\.svg/g' $@
 	@sed -i '' -e '/href="./s/\.neato/\.svg/g' $@
@@ -101,6 +102,8 @@ $(MD_TARGETS):$(TARGET_DIR)/%.html: $(SOURCE_DIR)/%.md makefile plugins/*.py
 	@sed -i '' -e '/src="./s/\.twopi/\.svg/g' $@
 	@sed -i '' -e '/src="./s/\.circo/\.svg/g' $@
 	@sed -i '' -e '/src="./s/\.seq/\.svg/g' $@
+
+# $(MD) --to html5 $< --output $@
 
 $(DOT_TARGETS):$(TARGET_DIR)/%.svg: $(SOURCE_DIR)/%.dot makefile
 	@mkdir -p $(@D)
@@ -140,6 +143,8 @@ serve:
 
 clean:
 	rm -rf $(TARGET_DIR)/*
+
+# QQQ = $(foreach var,$(CSS_SOURCES), $(python plugins/relpath.py . $(var));)
 
 debug:
 	@echo $(CSS_SOURCES)
