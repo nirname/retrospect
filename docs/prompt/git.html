@@ -67,7 +67,7 @@ code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /
 code span.er { color: #bf0303; text-decoration: underline; } /* Error */
 code span. { color: #1f1c1b; } /* Normal */
   </style>
-  <link rel="stylesheet" href="../../assets/github-markdown.css">
+  <link rel="stylesheet" href="../assets/github-markdown.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -202,7 +202,7 @@ git filter-branch --subdirectory-filter doc -- --all</code></pre>
 <p>See <a href="http://schacon.github.io/git/git-rev-parse#_specifying_revisions">git-rev-parse</a>.</p>
 <p>Here is an illustration, by Jon Loeliger. Both commit nodes B and C are parents of commit node A. Parent commits are ordered left-to-right.</p>
 <figure>
-<embed src="git-revisions.svg" /><figcaption>Git revisions</figcaption>
+<embed src="git-revisions.dot" /><figcaption>Git revisions</figcaption>
 </figure>
 <pre><code>A =      = A^0
 B = A^   = A^1     = A~1
