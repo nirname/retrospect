@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../assets/github-markdown.css">
-
 # Developers' prompt
 
 Bunch of useful instructions for developers about:
