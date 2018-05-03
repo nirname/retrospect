@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../assets/github-markdown.css">
-
 # ADB
 
 Download adb from http://adbshell.com/downloads
