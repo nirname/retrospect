@@ -2,8 +2,12 @@
 
 ## Estimate tables size
 
+```sql
 SELECT pg_size_pretty( pg_database_size('dbname') );
 SELECT pg_size_pretty( pg_total_relation_size('tablename') );
+
+select table_name, pg_size_pretty( pg_total_relation_size(table_name) ) from information_schema.tables where table_catalog = 'chat' and table_schema = 'public' and table_type = 'BASE TABLE';
+```
 
 ## Select triggers
 

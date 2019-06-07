@@ -74,93 +74,22 @@ code span. { color: #1f1c1b; } /* Normal */
 </head>
 <body>
 <h1 id="postgres">Postgres</h1>
-<h2 id="installation">Installation</h2>
-<p>Check out <a href="https://access.redhat.com/site/documentation/en-US/JBoss_Operations_Network/2.1/html/Installation_Guide/Installation_Guide-Database-PostgreSQL_Quick_Start_Installation.html">installation guide</a></p>
-<h3 id="ubuntu">Ubuntu</h3>
-<pre><code>sudo apt-get install libpq-dev</code></pre>
-<h3 id="os-x">OS X</h3>
-<pre><code>brew update
-brew doctor
-brew install postgres</code></pre>
-<h2 id="using-with-ruby">Using with Ruby</h2>
-<p>Add to Gemfile</p>
-<pre class="sourceCode ruby" id="cb3"><code class="sourceCode ruby"><div class="sourceLine" id="cb3-1" data-line-number="1">gem <span class="st">&#39;pg&#39;</span></div></code></pre>
-<p>Run this before <code>bundle install</code></p>
-<pre><code>bundle config build.pg --with-pg-config=/usr/pgsql-9.3/bin/pg_config</code></pre>
-<p>Without <code>bundle</code></p>
-<pre><code>gem install pg -- --with-pg-config=/usr/pgsql-9.3/bin/pg_config</code></pre>
-<h2 id="running">Running</h2>
-<p>Starting and stopping database server</p>
-<pre><code>service postgresql-9.3
-  initdb
-  start
-  stop
-  restart</code></pre>
-<p>Autostart for OS X</p>
-<pre><code>mkdir -p ~/Library/LaunchAgents
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist</code></pre>
-<p>Login as <code>postgres</code> user</p>
-<pre><code>sudo su - postgres</code></pre>
-<p>Manage database user</p>
-<pre><code>createuser -P -s -e username
-dropuser username</code></pre>
-<p>Change a role’s password:</p>
-<pre><code>ALTER ROLE davide WITH PASSWORD &#39;hu8jmn3&#39;;</code></pre>
-<p>Remove a role’s password:</p>
-<pre><code>ALTER ROLE davide WITH PASSWORD NULL;</code></pre>
-<p>Manage database</p>
-<pre><code>createdb -O username databasename
-dropdb dbname</code></pre>
-<p>Database console</p>
-<pre class="sourceCode bash" id="cb13"><code class="sourceCode bash"><div class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">psql</span> <span class="co"># open console</span></div>
-<div class="sourceLine" id="cb13-2" data-line-number="2">\<span class="fu">du</span> <span class="co"># list of users</span></div>
-<div class="sourceLine" id="cb13-3" data-line-number="3">\<span class="ex">q</span> <span class="co"># quit</span></div>
-<div class="sourceLine" id="cb13-4" data-line-number="4">\<span class="ex">l</span> <span class="co"># all schemas</span></div></code></pre>
-<p>Select triggers</p>
-<pre class="sourceCode sql" id="cb14"><code class="sourceCode sql"><div class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">select</span> * <span class="kw">from</span> pg_trigger;</div></code></pre>
-<p>Check out version</p>
-<pre class="sourceCode bash" id="cb15"><code class="sourceCode bash"><div class="sourceLine" id="cb15-1" data-line-number="1"><span class="ex">psql</span> --version<span class="kw">;</span></div></code></pre>
-<pre class="sourceCode sql" id="cb16"><code class="sourceCode sql"><div class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">select</span> version();</div></code></pre>
-<p>Find configuration file</p>
+<h2 id="estimate-tables-size">Estimate tables size</h2>
+<pre class="sourceCode sql" id="cb1"><code class="sourceCode sql"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">SELECT</span> pg_size_pretty( pg_database_size(<span class="st">&#39;dbname&#39;</span>) );</div>
+<div class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">SELECT</span> pg_size_pretty( pg_total_relation_size(<span class="st">&#39;tablename&#39;</span>) );</div>
+<div class="sourceLine" id="cb1-3" data-line-number="3"></div>
+<div class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">select</span> table_name, pg_size_pretty( pg_total_relation_size(table_name) ) <span class="kw">from</span> information_schema.tables <span class="kw">where</span> table_catalog = <span class="st">&#39;chat&#39;</span> <span class="kw">and</span> table_schema = <span class="st">&#39;public&#39;</span> <span class="kw">and</span> table_type = <span class="st">&#39;BASE TABLE&#39;</span>;</div></code></pre>
+<h2 id="select-triggers">Select triggers</h2>
+<pre class="sourceCode sql" id="cb2"><code class="sourceCode sql"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">select</span> * <span class="kw">from</span> pg_trigger;</div></code></pre>
+<h2 id="check-out-version">Check out version</h2>
+<pre class="sourceCode bash" id="cb3"><code class="sourceCode bash"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">psql</span> --version<span class="kw">;</span></div></code></pre>
+<pre class="sourceCode sql" id="cb4"><code class="sourceCode sql"><div class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">select</span> version();</div></code></pre>
+<h2 id="find-configuration-file">Find configuration file</h2>
 <pre><code>locate pg_hba.conf
 vi /var/lib/pgsql/9.3/data/pg_hba.conf</code></pre>
-<p>Upgrade from 9.1 to 9.3</p>
-<pre><code>sudo service postgresql stop
-sudo pg_dropcluster --stop 9.3 main
-sudo pg_upgradecluster 9.1 main
-sudo service postgresql start 9.3
-pg_dropcluster --stop 9.1 main</code></pre>
-<p>Dump and restore database</p>
-<pre><code># -Fc - custom format
-
-pg_dump -Fc -U user database &gt; path/to/dump # dump
-psql dbname &lt; path/to/dump # restore
-pg_restore -U user -d database filename # restore
-
-# restore sql
-
-psql -U user database &lt; dump</code></pre>
-<p>PostGIS</p>
-<pre><code>sudo apt-get install postgis*
-
-CREATE EXTENSION postgis;
-SELECT postgis_full_version();</code></pre>
-<p>For ansible</p>
-<pre><code>sudo apt-get install python-psycopg2</code></pre>
-<p>Check out listen addresses</p>
+<h2 id="check-out-listen-addresses">Check out listen addresses</h2>
 <pre><code>sudo netstat -pant | grep postgres
 find / -name postgresql.conf 2&gt; /dev/null
 listen_addresses = &#39;*&#39;</code></pre>
-<p>Database config example</p>
-<pre class="sourceCode yaml" id="cb23"><code class="sourceCode yaml"><div class="sourceLine" id="cb23-1" data-line-number="1"><span class="fu">production:</span></div>
-<div class="sourceLine" id="cb23-2" data-line-number="2">  <span class="fu">adapter:</span><span class="at"> postgresql</span></div>
-<div class="sourceLine" id="cb23-3" data-line-number="3">  <span class="fu">encoding:</span><span class="at"> unicode</span></div>
-<div class="sourceLine" id="cb23-4" data-line-number="4">  <span class="fu">database:</span><span class="at"> my_database</span></div>
-<div class="sourceLine" id="cb23-5" data-line-number="5">  <span class="fu">host:</span><span class="at"> 1.2.3.4</span></div>
-<div class="sourceLine" id="cb23-6" data-line-number="6">  <span class="fu">port:</span><span class="at"> 5432</span></div>
-<div class="sourceLine" id="cb23-7" data-line-number="7">  <span class="fu">pool:</span><span class="at"> 10</span></div>
-<div class="sourceLine" id="cb23-8" data-line-number="8">  <span class="fu">username:</span><span class="at"> my_user</span></div>
-<div class="sourceLine" id="cb23-9" data-line-number="9">  <span class="fu">password:</span><span class="at"> password</span></div></code></pre>
 </body>
 </html>

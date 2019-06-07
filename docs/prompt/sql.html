@@ -77,5 +77,15 @@ code span. { color: #1f1c1b; } /* Normal */
 <h2 id="выбрать-все-последовательности-и-обновить-id-в-таблицах">Выбрать все последовательности и обновить id в таблицах</h2>
 <pre class="sourceCode sql" id="cb1"><code class="sourceCode sql"><div class="sourceLine" id="cb1-1" data-line-number="1">  <span class="kw">SELECT</span> c.relname <span class="kw">FROM</span> pg_class c <span class="kw">WHERE</span> c.relkind = <span class="st">&#39;S&#39;</span>;</div>
 <div class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">SELECT</span> setval(<span class="st">&#39;topics_id_seq&#39;</span>, (<span class="kw">SELECT</span> <span class="fu">MAX</span>(<span class="kw">id</span>) <span class="kw">FROM</span> topics));</div></code></pre>
+<h2 id="in-not-in">IN != NOT IN</h2>
+<pre class="sourceCode sql" id="cb2"><code class="sourceCode sql"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">select</span> <span class="kw">id</span> <span class="kw">from</span> (<span class="kw">select</span> <span class="dv">1</span> <span class="kw">as</span> <span class="kw">id</span> <span class="kw">union</span> <span class="kw">select</span> <span class="dv">2</span> <span class="kw">union</span> <span class="kw">select</span> <span class="dv">3</span>) <span class="kw">as</span> t <span class="kw">where</span> <span class="kw">id</span> <span class="kw">in</span> (<span class="dv">1</span>,<span class="dv">2</span>,<span class="kw">null</span>);</div></code></pre>
+<pre class="text"><code> id
+----
+  1
+  2</code></pre>
+<pre class="sourceCode sql" id="cb4"><code class="sourceCode sql"><div class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">select</span> <span class="kw">id</span> <span class="kw">from</span> (<span class="kw">select</span> <span class="dv">1</span> <span class="kw">as</span> <span class="kw">id</span> <span class="kw">union</span> <span class="kw">select</span> <span class="dv">2</span> <span class="kw">union</span> <span class="kw">select</span> <span class="dv">3</span>) <span class="kw">as</span> t <span class="kw">where</span> <span class="kw">id</span> <span class="kw">not</span> <span class="kw">in</span> (<span class="dv">1</span>,<span class="dv">2</span>,<span class="kw">null</span>);</div></code></pre>
+<pre class="text"><code> id
+----
+(0 rows)</code></pre>
 </body>
 </html>
