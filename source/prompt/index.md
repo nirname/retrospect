@@ -2,8 +2,6 @@
 
 Bunch of useful instructions for developers about:
 
-[adb](adb.md)<br/>
-[aerospike](aerospike.md)<br/>
 [ansible](ansible.md)<br/>
 [bash](bash.md)<br/>
 [bat](bat.md)<br/>
