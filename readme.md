@@ -1,1 +1,26 @@
-index.md
+# Developers' prompt
+
+Bunch of useful instructions for developers about:
+
+[ansible.md](ansible.md)
+[bash.md](bash.md)
+[bat.md](bat.md)
+[elasticsearch.md](elasticsearch.md)
+[ffmpeg.md](ffmpeg.md)
+[gedit.md](gedit.md)
+[gpg.md](gpg.md)
+[index.md](index.md)
+[iptables.md](iptables.md)
+[mount.md](mount.md)
+[mq.md](mq.md)
+[nginx.md](nginx.md)
+[opengl.md](opengl.md)
+[postgres.md](postgres.md)
+[readme.md](readme.md)
+[sql.md](sql.md)
+[ssh.md](ssh.md)
+[ssl.md](ssl.md)
+[ubuntu.md](ubuntu.md)
+[vpn.md](vpn.md)
+[xls2csv.md](xls2csv.md)
+[zabbix.md](zabbix.md)
